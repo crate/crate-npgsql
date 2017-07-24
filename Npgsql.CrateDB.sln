@@ -3,8 +3,55 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7CF36276-6291-4E6F-B8A1-7A579004A379}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0DAE33D8-454A-46F6-81C7-3BF56BA591C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Npgsql.CrateDB", "src\Npgsql.CrateDB\Npgsql.CrateDB.csproj", "{276774CD-9269-4F99-89EC-D8D6371869AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Npgsql.CrateDBTests", "test\Npgsql.CrateDBTests\Npgsql.CrateDBTests.csproj", "{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Npgsql", "npgsql\src\Npgsql\Npgsql.csproj", "{12530E2E-A575-416F-891E-262CE33516D4}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugOptimizedCryptography|Any CPU = DebugOptimizedCryptography|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseOptimizedCryptography|Any CPU = ReleaseOptimizedCryptography|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{276774CD-9269-4F99-89EC-D8D6371869AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{276774CD-9269-4F99-89EC-D8D6371869AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{276774CD-9269-4F99-89EC-D8D6371869AA}.DebugOptimizedCryptography|Any CPU.ActiveCfg = Debug|Any CPU
+		{276774CD-9269-4F99-89EC-D8D6371869AA}.DebugOptimizedCryptography|Any CPU.Build.0 = Debug|Any CPU
+		{276774CD-9269-4F99-89EC-D8D6371869AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{276774CD-9269-4F99-89EC-D8D6371869AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{276774CD-9269-4F99-89EC-D8D6371869AA}.ReleaseOptimizedCryptography|Any CPU.ActiveCfg = Release|Any CPU
+		{276774CD-9269-4F99-89EC-D8D6371869AA}.ReleaseOptimizedCryptography|Any CPU.Build.0 = Release|Any CPU
+		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}.DebugOptimizedCryptography|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}.DebugOptimizedCryptography|Any CPU.Build.0 = Debug|Any CPU
+		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}.ReleaseOptimizedCryptography|Any CPU.ActiveCfg = Release|Any CPU
+		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}.ReleaseOptimizedCryptography|Any CPU.Build.0 = Release|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.DebugOptimizedCryptography|Any CPU.ActiveCfg = DebugOptimizedCryptography|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.DebugOptimizedCryptography|Any CPU.Build.0 = DebugOptimizedCryptography|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.ReleaseOptimizedCryptography|Any CPU.ActiveCfg = ReleaseOptimizedCryptography|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.ReleaseOptimizedCryptography|Any CPU.Build.0 = ReleaseOptimizedCryptography|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{276774CD-9269-4F99-89EC-D8D6371869AA} = {7CF36276-6291-4E6F-B8A1-7A579004A379}
+		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C} = {0DAE33D8-454A-46F6-81C7-3BF56BA591C5}
+		{12530E2E-A575-416F-891E-262CE33516D4} = {7CF36276-6291-4E6F-B8A1-7A579004A379}
 	EndGlobalSection
 EndGlobal
