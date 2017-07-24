@@ -1,0 +1,3 @@
+[submodule "npgsql"]
+	path = npgsql
+	url = https://github.com/pircher-software/npgsql.git
