@@ -32,7 +32,7 @@ namespace Npgsql.CrateDB
                 if (parameter != null)
                     parameter.ConvertedValue = s;
             }
-            return base.ValidateAndGetLength(s, ref lengthCache, parameter);
+            return base.ValidateObjectAndGetLength(s, ref lengthCache, parameter);
         }
 
         protected override Task WriteObjectWithLength(object value, NpgsqlWriteBuffer buf, NpgsqlLengthCache lengthCache, NpgsqlParameter parameter, bool async)
