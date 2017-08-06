@@ -318,15 +318,19 @@ namespace Npgsql.CrateDBTests
         public void SelectObjectType()
         {
             using (var con = OpenConnection())
-            using (var cmd = new NpgsqlCommand("select object_field from test", con))
-            using (var rdr = cmd.ExecuteReader())
             {
-                Assert.That(rdr.Read(), Is.True);
+                con.TypeMapper.UseCrateDBObjectHandler();
 
-                var r = rdr.GetObject<TestObject>(0);
+                using (var cmd = new NpgsqlCommand("select object_field from test", con))
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    Assert.That(rdr.Read(), Is.True);
 
-                Assert.That(r, Is.InstanceOf(typeof(TestObject)));
-                Assert.That(r, Is.EqualTo(new TestObject { inner = "Zoon" }));
+                    var r = rdr.GetObject<TestObject>(0);
+
+                    Assert.That(r, Is.InstanceOf(typeof(TestObject)));
+                    Assert.That(r, Is.EqualTo(new TestObject { inner = "Zoon" }));
+                }
             }
         }
 
@@ -349,19 +353,23 @@ namespace Npgsql.CrateDBTests
         public void SelectObjectArrayType()
         {
             using (var con = OpenConnection())
-            using (var cmd = new NpgsqlCommand("select obj_array from arrayTest", con))
-            using (var rdr = cmd.ExecuteReader())
             {
-                Assert.That(rdr.Read(), Is.True);
+                con.TypeMapper.UseCrateDBObjectHandler();
 
-                var r = rdr.GetObjectArray<TestObject>(0);
-
-                Assert.That(r, Is.InstanceOf(typeof(TestObject[])));
-                Assert.That(r, Is.EquivalentTo(new TestObject[]
+                using (var cmd = new NpgsqlCommand("select obj_array from arrayTest", con))
+                using (var rdr = cmd.ExecuteReader())
                 {
+                    Assert.That(rdr.Read(), Is.True);
+
+                    var r = rdr.GetObjectArray<TestObject>(0);
+
+                    Assert.That(r, Is.InstanceOf(typeof(TestObject[])));
+                    Assert.That(r, Is.EquivalentTo(new TestObject[]
+                    {
                     new TestObject { inner = "Zoon1" },
                     new TestObject { inner = "Zoon2" }
-                }));
+                    }));
+                }
             }
         }
 
@@ -425,29 +433,33 @@ namespace Npgsql.CrateDBTests
         public void SelectGeoShapeArrayTypeWithDataReader()
         {
             using (var con = OpenConnection())
-            using (var cmd = new NpgsqlCommand("select geo_shape_array from arrayTest", con))
-            using (var rdr = cmd.ExecuteReader())
             {
-                Assert.That(rdr.Read(), Is.True);
+                con.TypeMapper.UseCrateDBObjectHandler();
 
-                var r = rdr.GetObjectArray<GeoShape>(0);
+                using (var cmd = new NpgsqlCommand("select geo_shape_array from arrayTest", con))
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    Assert.That(rdr.Read(), Is.True);
 
-                Assert.That(r, Is.InstanceOf(typeof(GeoShape[])));
-                Assert.That(r.Length, Is.EqualTo(2));
-                Assert.That(r[0].type, Is.EqualTo("Polygon"));
-                Assert.That(r[1].type, Is.EqualTo("Polygon"));
+                    var r = rdr.GetObjectArray<GeoShape>(0);
 
-                var expectedCoordinates = new double[][][] {
-                    new double[][]
-                    {
-                        new double[] { 30.0, 10.0 },
-                        new double[] { 40.0, 40.0 },
-                        new double[] { 20.0, 40.0 },
-                        new double[] { 10.0, 20.0 },
-                        new double[] { 30.0, 10.0 }
-                    }
-                };
-                Assert.That(r[0].coordinates, Is.EqualTo(expectedCoordinates));
+                    Assert.That(r, Is.InstanceOf(typeof(GeoShape[])));
+                    Assert.That(r.Length, Is.EqualTo(2));
+                    Assert.That(r[0].type, Is.EqualTo("Polygon"));
+                    Assert.That(r[1].type, Is.EqualTo("Polygon"));
+
+                    var expectedCoordinates = new double[][][] {
+                        new double[][]
+                        {
+                            new double[] { 30.0, 10.0 },
+                            new double[] { 40.0, 40.0 },
+                            new double[] { 20.0, 40.0 },
+                            new double[] { 10.0, 20.0 },
+                            new double[] { 30.0, 10.0 }
+                        }
+                    };
+                    Assert.That(r[0].coordinates, Is.EqualTo(expectedCoordinates));
+                }
             }
         }
 
