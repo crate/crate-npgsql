@@ -19,8 +19,7 @@ namespace Npgsql.CrateDB
         /// <returns>The value of the specified column as a byte array.</returns>
         public static byte[] GetBytes(this NpgsqlDataReader reader, int ordinal)
         {
-            var array = reader.GetFieldValue<char[]>(ordinal);
-            return array.Select(c => Convert.ToByte(c)).ToArray();
+            return reader.GetFieldValue<char[]>(ordinal).Select(c => Convert.ToByte(c)).ToArray();
         }
 
         /// <summary>
