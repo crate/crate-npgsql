@@ -2,14 +2,18 @@
 
   <PropertyGroup>
     <VersionPrefix>1.0.0</VersionPrefix>
-    <Description>CrateDB plugin for Npgsql, allowing usage of Npgsql with CrateDb.</Description>
+    <Description>A plugin that provides extensions to Npgsql to simplify usage with CrateDB.</Description>
     <Authors>Andreas Pircher;Michael Beer</Authors>
-    <Copyright>Copyright 2017 © Crate</Copyright>
-    <Company>Crate</Company>
-    <PackageTags>npgsql cratedb ado ado.net database sql</PackageTags>
+    <Copyright>Copyright 2017 © Pircher Software</Copyright>
+    <Company>Pircher Software</Company>
+    <PackageTags>npgsql crate cratedb ado ado.net database sql</PackageTags>
     <TargetFrameworks>net45;netstandard1.3</TargetFrameworks>
     <WarningsAsErrors>true</WarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageProjectUrl>https://github.com/pircher-software/npgsql-cratedb</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pircher-software/npgsql-cratedb.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>This plugin depends on a fork of the official Npgsql project. That fork contains the necessary changes to use Npgsql as a .NET data provider for CrateDB. We are working to get those changes merged upstream.</PackageReleaseNotes>
   </PropertyGroup>
   
   <ItemGroup>

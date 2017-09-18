@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7CF36276-6291-4E6F-B8A1-7A579004A379}"
 EndProject
@@ -39,12 +39,12 @@ Global
 		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}.ReleaseOptimizedCryptography|Any CPU.Build.0 = Release|Any CPU
 		{12530E2E-A575-416F-891E-262CE33516D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12530E2E-A575-416F-891E-262CE33516D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12530E2E-A575-416F-891E-262CE33516D4}.DebugOptimizedCryptography|Any CPU.ActiveCfg = DebugOptimizedCryptography|Any CPU
-		{12530E2E-A575-416F-891E-262CE33516D4}.DebugOptimizedCryptography|Any CPU.Build.0 = DebugOptimizedCryptography|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.DebugOptimizedCryptography|Any CPU.ActiveCfg = Debug|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.DebugOptimizedCryptography|Any CPU.Build.0 = Debug|Any CPU
 		{12530E2E-A575-416F-891E-262CE33516D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12530E2E-A575-416F-891E-262CE33516D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12530E2E-A575-416F-891E-262CE33516D4}.ReleaseOptimizedCryptography|Any CPU.ActiveCfg = ReleaseOptimizedCryptography|Any CPU
-		{12530E2E-A575-416F-891E-262CE33516D4}.ReleaseOptimizedCryptography|Any CPU.Build.0 = ReleaseOptimizedCryptography|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.ReleaseOptimizedCryptography|Any CPU.ActiveCfg = Release|Any CPU
+		{12530E2E-A575-416F-891E-262CE33516D4}.ReleaseOptimizedCryptography|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,5 +53,8 @@ Global
 		{276774CD-9269-4F99-89EC-D8D6371869AA} = {7CF36276-6291-4E6F-B8A1-7A579004A379}
 		{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C} = {0DAE33D8-454A-46F6-81C7-3BF56BA591C5}
 		{12530E2E-A575-416F-891E-262CE33516D4} = {7CF36276-6291-4E6F-B8A1-7A579004A379}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37AB6386-EC23-4573-896F-48D0FAFC3059}
 	EndGlobalSection
 EndGlobal

@@ -122,7 +122,7 @@ namespace Npgsql.CrateDBTests
             using (var cmd = new NpgsqlCommand("select timestamp_field from test", con))
             {
                 var r = cmd.ExecuteScalar();
-                Assert.That(r, Is.EqualTo(new DateTime(2000, 1, 1).ToUniversalTime()));
+                Assert.That(r, Is.EqualTo(new DateTime(2000, 1, 1)));
             }
         }
 
@@ -208,15 +208,14 @@ namespace Npgsql.CrateDBTests
         }
 
         [Test]
-        public void SelectByteArrayTypeWithGetBytes()
+        public void SelectByteArrayTypeWithNpgsqlGetBytes()
         {
             using (var con = OpenConnection())
             using (var cmd = new NpgsqlCommand("select byte_array from arrayTest", con))
             using (var rdr = cmd.ExecuteReader())
             {
                 Assert.That(rdr.Read(), Is.EqualTo(true));
-
-                Assert.Throws(typeof(InvalidOperationException), () =>
+                Assert.Throws(typeof(InvalidCastException), () =>
                 {
                     var buffer = new byte[10];
                     var bytesRead = rdr.GetBytes(0, 0, buffer, 0, 10);
@@ -299,7 +298,7 @@ namespace Npgsql.CrateDBTests
             using (var cmd = new NpgsqlCommand("select timestamp_array from arrayTest", con))
             {
                 var r = cmd.ExecuteScalar();
-                Assert.That(r, Is.EquivalentTo(new DateTime[] { new DateTime(2000, 1, 1).ToUniversalTime(), new DateTime(1970, 1, 1).ToUniversalTime() }));
+                Assert.That(r, Is.EquivalentTo(new DateTime[] { new DateTime(2000, 1, 1), new DateTime(1970, 1, 1) }));
             }
         }
 
