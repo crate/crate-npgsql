@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Npgsql.CrateDB
+namespace Npgsql.CrateDb
 {
     /// <summary>
     /// Provides extension methods for NpgSqlDataReader specific to CrateDb.

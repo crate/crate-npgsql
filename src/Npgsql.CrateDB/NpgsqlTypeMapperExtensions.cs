@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Npgsql.CrateDB
+namespace Npgsql.CrateDb
 {
     /// <summary>
     /// Implements extension methods to register features specific to CrateDB.
@@ -26,7 +26,7 @@ namespace Npgsql.CrateDB
             {
                 PgTypeName = "json",
                 NpgsqlDbType = NpgsqlDbType.Json,
-                TypeHandlerFactory = new CrateObjectHandlerFactory()
+                TypeHandlerFactory = new CrateDbObjectHandlerFactory()
             }
             .Build());
 

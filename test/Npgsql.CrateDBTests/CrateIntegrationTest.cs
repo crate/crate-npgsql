@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Npgsql.CrateDB;
+using Npgsql.CrateDb;
 
 namespace Npgsql.CrateDBTests
 {
     class CrateIntegrationTest : TestBase
     {
+        protected void RegisterCrateDbDatabaseInfoFactory()
+        {
+            NpgsqlDatabaseInfo.RegisterFactory(new CrateDbDatabaseInfoFactory());
+        }
+
         protected void CreateTestTable()
         {
             using (var con = OpenConnection())

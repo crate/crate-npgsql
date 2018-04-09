@@ -10,11 +10,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Npgsql.CrateDB
+namespace Npgsql.CrateDb
 {
-    class CrateObjectArrayHandler : ArrayHandler<string>
+    class CrateDbObjectArrayHandler : ArrayHandler<string>
     {
-        public CrateObjectArrayHandler(NpgsqlTypeHandler elementHandler)
+        public CrateDbObjectArrayHandler(NpgsqlTypeHandler elementHandler)
             : base(elementHandler)
         {
         }
@@ -23,7 +23,7 @@ namespace Npgsql.CrateDB
         {
             if (typeof(T2).IsArray)
             {
-                var method = typeof(CrateObjectArrayHandler).GetMethod("ReadArray", BindingFlags.Instance | BindingFlags.NonPublic);
+                var method = typeof(CrateDbObjectArrayHandler).GetMethod("ReadArray", BindingFlags.Instance | BindingFlags.NonPublic);
                 var genericMethod = method.MakeGenericMethod(typeof(T2).GetElementType());
                 var task = (ValueTask<Array>)genericMethod.Invoke(this, new object[] { buf, byteLen, async, fieldDescription });
                 object o = await task;

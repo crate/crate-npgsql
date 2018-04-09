@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7CF36276-629
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0DAE33D8-454A-46F6-81C7-3BF56BA591C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Npgsql.CrateDB", "src\Npgsql.CrateDB\Npgsql.CrateDB.csproj", "{276774CD-9269-4F99-89EC-D8D6371869AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Npgsql.CrateDb", "src\Npgsql.CrateDb\Npgsql.CrateDb.csproj", "{276774CD-9269-4F99-89EC-D8D6371869AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Npgsql.CrateDBTests", "test\Npgsql.CrateDBTests\Npgsql.CrateDBTests.csproj", "{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Npgsql.CrateDbTests", "test\Npgsql.CrateDbTests\Npgsql.CrateDbTests.csproj", "{B7245AC0-A91D-4FF2-994A-E34BC06ABA0C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Npgsql", "npgsql\src\Npgsql\Npgsql.csproj", "{12530E2E-A575-416F-891E-262CE33516D4}"
 EndProject

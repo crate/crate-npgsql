@@ -1,7 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Linq;
-using Npgsql.CrateDB;
+using Npgsql.CrateDb;
+using System.Data;
+using Npgsql.Logging;
 
 namespace Npgsql.CrateDBTests
 {
@@ -13,6 +15,12 @@ namespace Npgsql.CrateDBTests
         [OneTimeSetUp]
         public void Init()
         {
+            RegisterCrateDbDatabaseInfoFactory();
+
+            NpgsqlLogManager.Provider = new ConsoleLoggingProvider(NpgsqlLogLevel.Trace);
+            CrateDbDatabaseInfo.AddCrateDbSpecificTypeMappings(NpgsqlConnection.GlobalTypeMapper);
+            //CrateDb.CrateDbDatabaseInfo.RemoveUnsupportedDataTypes(NpgsqlConnection.GlobalTypeMapper);
+
             CreateTestTable();
             InsertIntoTestTable();
 
@@ -122,7 +130,7 @@ namespace Npgsql.CrateDBTests
             using (var cmd = new NpgsqlCommand("select timestamp_field from test", con))
             {
                 var r = cmd.ExecuteScalar();
-                Assert.That(r, Is.EqualTo(new DateTime(2000, 1, 1)));
+                Assert.That(r, Is.EqualTo(new DateTime(2000, 1, 1).ToUniversalTime()));
             }
         }
 
@@ -206,13 +214,13 @@ namespace Npgsql.CrateDBTests
                 Assert.That(r, Is.EquivalentTo(new byte[] { 120, 100 }));
             }
         }
-
+        
         [Test]
         public void SelectByteArrayTypeWithNpgsqlGetBytes()
         {
             using (var con = OpenConnection())
             using (var cmd = new NpgsqlCommand("select byte_array from arrayTest", con))
-            using (var rdr = cmd.ExecuteReader())
+            using (var rdr = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
             {
                 Assert.That(rdr.Read(), Is.EqualTo(true));
                 Assert.Throws(typeof(InvalidCastException), () =>
@@ -220,6 +228,7 @@ namespace Npgsql.CrateDBTests
                     var buffer = new byte[10];
                     var bytesRead = rdr.GetBytes(0, 0, buffer, 0, 10);
                 });
+                rdr.Close();
             }
         }
 
@@ -228,7 +237,7 @@ namespace Npgsql.CrateDBTests
         {
             using (var con = OpenConnection())
             using (var cmd = new NpgsqlCommand("select byte_array from arrayTest", con))
-            using (var rdr = cmd.ExecuteReader())
+            using (var rdr = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
             {
                 Assert.That(rdr.Read(), Is.EqualTo(true));
                 var r = rdr.GetBytes(0);
@@ -298,7 +307,7 @@ namespace Npgsql.CrateDBTests
             using (var cmd = new NpgsqlCommand("select timestamp_array from arrayTest", con))
             {
                 var r = cmd.ExecuteScalar();
-                Assert.That(r, Is.EquivalentTo(new DateTime[] { new DateTime(2000, 1, 1), new DateTime(1970, 1, 1) }));
+                Assert.That(r, Is.EquivalentTo(new DateTime[] { new DateTime(2000, 1, 1).ToUniversalTime(), new DateTime(1970, 1, 1).ToUniversalTime() }));
             }
         }
 
@@ -436,7 +445,7 @@ namespace Npgsql.CrateDBTests
                 con.TypeMapper.UseCrateDBObjectHandler();
 
                 using (var cmd = new NpgsqlCommand("select geo_shape_array from arrayTest", con))
-                using (var rdr = cmd.ExecuteReader())
+                using (var rdr = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
                 {
                     Assert.That(rdr.Read(), Is.True);
 

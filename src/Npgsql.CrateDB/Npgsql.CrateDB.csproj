@@ -7,7 +7,7 @@
     <Copyright>Copyright 2017 © Pircher Software</Copyright>
     <Company>Pircher Software</Company>
     <PackageTags>npgsql crate cratedb ado ado.net database sql</PackageTags>
-    <TargetFrameworks>net45;netstandard1.3</TargetFrameworks>
+    <TargetFrameworks>net45;net451;netstandard2.0</TargetFrameworks>
     <WarningsAsErrors>true</WarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageProjectUrl>https://github.com/pircher-software/npgsql-cratedb</PackageProjectUrl>

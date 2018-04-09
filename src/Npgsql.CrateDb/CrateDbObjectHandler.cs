@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 using Npgsql.BackendMessages;
 using Npgsql.TypeHandling;
 
-namespace Npgsql.CrateDB
+namespace Npgsql.CrateDb
 {
-    class CrateObjectHandlerFactory : NpgsqlTypeHandlerFactory<string>
+    class CrateDbObjectHandlerFactory : NpgsqlTypeHandlerFactory<string>
     {
         protected override NpgsqlTypeHandler<string> Create(NpgsqlConnection conn)
-            => new CrateObjectHandler(conn);
+            => new CrateDbObjectHandler(conn);
     }
 
-    class CrateObjectHandler : TextHandler
+    class CrateDbObjectHandler : TextHandler
     {
-        internal CrateObjectHandler(NpgsqlConnection connection) : base(connection)
+        internal CrateDbObjectHandler(NpgsqlConnection connection) : base(connection)
         {
         }
 
@@ -59,9 +59,13 @@ namespace Npgsql.CrateDB
             }
         }
 
-        protected override ArrayHandler CreateArrayHandler(PostgresType arrayBackendType)
-        {
-            return new CrateObjectArrayHandler(this);
-        }
+        /// <summary>
+        /// Creates a type handler for arrays of this handler's type.
+        /// </summary>
+        /// <remarks>
+        /// The CrateObjectHandler requires a special array handler that returns arrays of arbitrary clr types.
+        /// </remarks>
+        protected override ArrayHandler CreateArrayHandler(PostgresType arrayBackendType) => 
+             new CrateDbObjectArrayHandler(this);
     }
 }
