@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql.CrateDb;
 
-namespace Npgsql.CrateDBTests
+namespace Npgsql.CrateDbTests
 {
     class CrateIntegrationTest : TestBase
     {

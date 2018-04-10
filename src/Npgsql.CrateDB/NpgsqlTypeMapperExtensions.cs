@@ -19,7 +19,7 @@ namespace Npgsql.CrateDb
         /// Maps the CrateObjectHandler to the json database type.
         /// </summary>
         /// <param name="mapper">The type mapper to set up (global or connection-specific)</param>
-        public static INpgsqlTypeMapper UseCrateDBObjectHandler(this INpgsqlTypeMapper mapper)
+        public static INpgsqlTypeMapper UseCrateDbObjectHandler(this INpgsqlTypeMapper mapper)
         {
             // Map CrateDb-specific json-Handler.
             mapper.AddMapping(new NpgsqlTypeMappingBuilder

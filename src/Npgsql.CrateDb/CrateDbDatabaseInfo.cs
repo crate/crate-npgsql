@@ -120,7 +120,7 @@ namespace Npgsql.CrateDb
             }
             .Build());
 
-            // Map CrateDB timestampz type to the CrateDBTimestampHandler.
+            // Map CrateDB timestampz type to the CrateDbTimestampHandler.
             mapper.AddMapping(new NpgsqlTypeMappingBuilder
             {
                 PgTypeName = "timestampz",
@@ -131,7 +131,7 @@ namespace Npgsql.CrateDb
             }
             .Build());
 
-            //mapper.UseCrateDBObjectHandler();
+            //mapper.UseCrateDbObjectHandler();
         }
 
         /// <summary>

@@ -5,12 +5,12 @@ using Npgsql.CrateDb;
 using System.Data;
 using Npgsql.Logging;
 
-namespace Npgsql.CrateDBTests
+namespace Npgsql.CrateDbTests
 {
     /// <summary>
     /// Tests for the CrateDb plugin.
     /// </summary>
-    class CrateTypesTest : CrateIntegrationTest
+    class CrateDbTypesTest : CrateIntegrationTest
     {
         [OneTimeSetUp]
         public void Init()
@@ -327,7 +327,7 @@ namespace Npgsql.CrateDBTests
         {
             using (var con = OpenConnection())
             {
-                con.TypeMapper.UseCrateDBObjectHandler();
+                con.TypeMapper.UseCrateDbObjectHandler();
 
                 using (var cmd = new NpgsqlCommand("select object_field from test", con))
                 using (var rdr = cmd.ExecuteReader())
@@ -362,7 +362,7 @@ namespace Npgsql.CrateDBTests
         {
             using (var con = OpenConnection())
             {
-                con.TypeMapper.UseCrateDBObjectHandler();
+                con.TypeMapper.UseCrateDbObjectHandler();
 
                 using (var cmd = new NpgsqlCommand("select obj_array from arrayTest", con))
                 using (var rdr = cmd.ExecuteReader())
@@ -442,7 +442,7 @@ namespace Npgsql.CrateDBTests
         {
             using (var con = OpenConnection())
             {
-                con.TypeMapper.UseCrateDBObjectHandler();
+                con.TypeMapper.UseCrateDbObjectHandler();
 
                 using (var cmd = new NpgsqlCommand("select geo_shape_array from arrayTest", con))
                 using (var rdr = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
