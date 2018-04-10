@@ -25,17 +25,17 @@ We are working on changes to automate this step.
 
 The CrateDB object handler enables reading and/or writing of arbitrary CLR objects from/to CrateDB columns with a data type of json or json array. 
 
-To use this feature, import the `Npgsql.CrateDB` namespace and call the `UseCrateDBObjectHandler` extension method for the TypeMapper of your `NpgsqlConnection`:
+To use this feature, import the `Npgsql.CrateDb` namespace and call the `UseCrateDbObjectHandler` extension method for the TypeMapper of your `NpgsqlConnection`:
 
 
 ```c#
-using Npgsql.CrateDB;
+using Npgsql.CrateDb;
 
 ...
 
 using (var con = OpenConnection())
 {
-    con.TypeMapper.UseCrateDBObjectHandler();
+    con.TypeMapper.UseCrateDbObjectHandler();
     
     ...
 }
@@ -77,7 +77,7 @@ using (var reader = command.ExecuteReader())
 }
 ```
 
-The `GetObject<T>(NpgsqlDataReader, int)` and `GetObjectArray<T>(NpgsqlDataReader, int)` extension methods are implemented in the `Npgsql.CrateDB` namespace.
+The `GetObject<T>(NpgsqlDataReader, int)` and `GetObjectArray<T>(NpgsqlDataReader, int)` extension methods are implemented in the `Npgsql.CrateDb` namespace.
 
 With the help of the CrateDB object handler you can also set arbitrary CLR objects and arrays as parameter values for parameters referencing columns with a data type of json or json array.
 
