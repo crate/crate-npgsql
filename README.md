@@ -14,12 +14,19 @@ The factory has to be registered before opening connections to CrateDB.
 Further, the type mappings of Npgsql have to be adapted for CrateDB with a call to `CrateDbDatabaseInfo.AddCrateDbSpecificTypeMappings`. This can either be done globally in `NpgsqlConnection.GlobalTypeMapper` or per connection:
 
 ```c#
-var conn = new NpgsqlConnection(connectionString);
-conn.Open();
-CrateDb.CrateDbDatabaseInfo.AddCrateDbSpecificTypeMappings(conn.TypeMapper);
+using Npgsql.CrateDb;
+
+...
+
+using (var con = OpenConnection())
+{
+    CrateDbDatabaseInfo.AddCrateDbSpecificTypeMappings(con.TypeMapper);
+    
+    ...
+}
 ```
 
-We are working on changes to automate this step.
+We are working on changes to get rid of this step.
 
 ## CrateDB object handler
 
