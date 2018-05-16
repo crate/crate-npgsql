@@ -19,27 +19,30 @@ namespace Npgsql.CrateDb
         {
         }
 
-        protected async override ValueTask<T2> Read<T2>(NpgsqlReadBuffer buf, int byteLen, bool async, FieldDescription fieldDescription = null)
+        protected async override ValueTask<TAny> Read<TAny>(NpgsqlReadBuffer buf, int len, bool async, FieldDescription fieldDescription = null)
         {
-            if (typeof(T2).IsArray)
+            if (typeof(TAny).IsArray)
             {
-                var method = typeof(CrateDbObjectArrayHandler).GetMethod("ReadArray", BindingFlags.Instance | BindingFlags.NonPublic);
-                var genericMethod = method.MakeGenericMethod(typeof(T2).GetElementType());
-                var task = (ValueTask<Array>)genericMethod.Invoke(this, new object[] { buf, byteLen, async, fieldDescription });
+                var method = typeof(CrateDbObjectArrayHandler).GetMethod("ReadArray",
+                    BindingFlags.Instance | BindingFlags.NonPublic,
+                    null,
+                    CallingConventions.Any,
+                    new Type[] { typeof(NpgsqlReadBuffer), typeof(int), typeof(bool), typeof(FieldDescription) },
+                    null);
+                var genericMethod = method.MakeGenericMethod(typeof(TAny).GetElementType());
+                var task = (ValueTask<Array>)genericMethod.Invoke(this, new object[] { buf, len, async, fieldDescription });
                 object o = await task;
-                return (T2)o;
+                return (TAny)o;
             }
-
-            return await base.Read<T2>(buf, byteLen, async, fieldDescription);
+            return await base.Read<TAny>(buf, len, async, fieldDescription);
         }
 
-        internal async ValueTask<Array> ReadArray<TElement>(NpgsqlReadBuffer buf, int byteLen, bool async, FieldDescription fieldDescription = null)
+        internal async ValueTask<Array> ReadArray<TElement>(NpgsqlReadBuffer buf, int len, bool async, FieldDescription fieldDescription = null)
         {
-            var asTypedHandler = this as INpgsqlTypeHandler<Array>;
+            var asTypedHandler = this as ArrayHandler;
             if (asTypedHandler != null)
             {
-                var stringArray = await asTypedHandler.Read(buf, byteLen, async, fieldDescription);
-                return stringArray.OfType<string>().Select(s => JsonConvert.DeserializeObject<TElement>(s)).ToArray();
+                return await ReadArray<TElement>(buf, async);
             }
             return default(TElement[]);
         }
