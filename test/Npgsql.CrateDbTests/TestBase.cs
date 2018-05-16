@@ -19,7 +19,7 @@ namespace Npgsql.CrateDbTests
         /// Unless the NPGSQL_CRATE_TEST_DB environment variable is defined, this is used as the connection string for the
         /// test database.
         /// </summary>
-        const string DefaultConnectionString = "Server=localhost;User ID=npgsql_tests;Password=npgsql_tests;Database=npgsql_tests;Timeout=0;Command Timeout=0";
+        const string DefaultConnectionString = "Server=localhost;User ID=crate;Database=npgsql_tests;Timeout=0;Command Timeout=0";
 
         protected virtual NpgsqlConnection OpenConnection(string connectionString = null)
         {
