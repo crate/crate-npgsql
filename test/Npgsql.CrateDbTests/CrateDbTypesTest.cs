@@ -18,8 +18,6 @@ namespace Npgsql.CrateDbTests
             RegisterCrateDbDatabaseInfoFactory();
 
             NpgsqlLogManager.Provider = new ConsoleLoggingProvider(NpgsqlLogLevel.Trace);
-            CrateDbDatabaseInfo.AddCrateDbSpecificTypeMappings(NpgsqlConnection.GlobalTypeMapper);
-            //CrateDb.CrateDbDatabaseInfo.RemoveUnsupportedDataTypes(NpgsqlConnection.GlobalTypeMapper);
 
             CreateTestTable();
             InsertIntoTestTable();
