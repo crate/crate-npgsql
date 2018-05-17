@@ -65,7 +65,7 @@ namespace Npgsql.CrateDb
         /// <remarks>
         /// The CrateObjectHandler requires a special array handler that returns arrays of arbitrary clr types.
         /// </remarks>
-        protected override ArrayHandler CreateArrayHandler(PostgresType arrayBackendType) => 
+        public override ArrayHandler CreateArrayHandler(PostgresType arrayBackendType) => 
              new CrateDbObjectArrayHandler(this);
     }
 }

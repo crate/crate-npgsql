@@ -1,32 +1,14 @@
 # CrateDB Npgsql Plugin
 A plugin that provides extensions to Npgsql which enable usage of Npgsql as a .NET data provider for CrateDB.
 
-This plugin is based on the official [Npgsql](https://github.com/npgsql/npgsql) project.
+This plugin depends on a [fork](https://github.com/crate/npgsql) of the official [Npgsql](https://github.com/npgsql/npgsql) project. That fork contains the necessary changes to Npgsql that make this plugin work. We are working to get those changes merged upstream.
 
-To use Npgsql with CrateDB, a special DatabaseInfoFactory-class has to be registered with a call to `NpgsqlDatabaseInfo.RegisterFactory`:
+To use Npgsql with CrateDB, a special DatabaseInfoFactory-class has to be registered with a call to `NpgsqlDatabaseInfo.RegisterFactory`.
+The factory has to be registered before opening connections to CrateDB:
 
 ```c#
 NpgsqlDatabaseInfo.RegisterFactory(new CrateDbDatabaseInfoFactory());
 ```
-
-The factory has to be registered before opening connections to CrateDB.
-
-Further, the type mappings of Npgsql have to be adapted for CrateDB with a call to `CrateDbDatabaseInfo.AddCrateDbSpecificTypeMappings`. This can either be done globally in `NpgsqlConnection.GlobalTypeMapper` or per connection:
-
-```c#
-using Npgsql.CrateDb;
-
-...
-
-using (var con = OpenConnection())
-{
-    CrateDbDatabaseInfo.AddCrateDbSpecificTypeMappings(con.TypeMapper);
-
-    ...
-}
-```
-
-We are working on changes to get rid of this step.
 
 ## CrateDB object handler
 
@@ -127,19 +109,5 @@ using (var reader = command.ExecuteReader())
 
         ...
     }
-}
-```
-
-## Known Issues
-
-There is a problem with the length parameter of row messages for Byte-Arrays and GeoShape-Arrays that is currently under investigation. This can lead to exceptions when closing a corresponding data reader. To bypass this problem, open data readers with `CommandBehavior.SequentialAccess` when working with those data types:
-
-```c#
-...
-
-using (var command = new NpgsqlCommand("select my_geo_shape_array_column from my_table", con))
-using (var reader = command.ExecuteReader(CommandBehavior.SequentialAccess))
-{
-    ...
 }
 ```
