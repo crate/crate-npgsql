@@ -220,7 +220,7 @@ namespace Npgsql.CrateDbTests
         {
             using (var con = OpenConnection())
             using (var cmd = new NpgsqlCommand("select byte_array from arrayTest", con))
-            using (var rdr = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
+            using (var rdr = cmd.ExecuteReader())
             {
                 Assert.That(rdr.Read(), Is.EqualTo(true));
                 Assert.Throws(typeof(InvalidCastException), () =>
@@ -237,7 +237,7 @@ namespace Npgsql.CrateDbTests
         {
             using (var con = OpenConnection())
             using (var cmd = new NpgsqlCommand("select byte_array from arrayTest", con))
-            using (var rdr = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
+            using (var rdr = cmd.ExecuteReader())
             {
                 Assert.That(rdr.Read(), Is.EqualTo(true));
                 var r = rdr.GetBytes(0);
@@ -445,7 +445,7 @@ namespace Npgsql.CrateDbTests
                 con.TypeMapper.UseCrateDbObjectHandler();
 
                 using (var cmd = new NpgsqlCommand("select geo_shape_array from arrayTest", con))
-                using (var rdr = cmd.ExecuteReader(CommandBehavior.SequentialAccess))
+                using (var rdr = cmd.ExecuteReader())
                 {
                     Assert.That(rdr.Read(), Is.True);
 
