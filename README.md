@@ -1,7 +1,7 @@
 # npgsql-cratedb
 A plugin that provides extensions to Npgsql which enable usage of Npgsql as a .NET data provider for CrateDB.
 
-This plugin depends on a [fork](https://github.com/pircher-software/npgsql/tree/a/crate-dev) of the official [Npgsql](https://github.com/npgsql/npgsql) project. That fork contains the necessary changes to Npgsql that make this plugin work. We are working to get those changes merged upstream.
+This plugin is based on the official [Npgsql](https://github.com/npgsql/npgsql) project.
 
 To use Npgsql with CrateDB, a special DatabaseInfoFactory-class has to be registered with a call to `NpgsqlDatabaseInfo.RegisterFactory`:
 
