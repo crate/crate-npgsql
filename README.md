@@ -1,4 +1,4 @@
-# npgsql-cratedb
+# CrateDB Npgsql Plugin
 A plugin that provides extensions to Npgsql which enable usage of Npgsql as a .NET data provider for CrateDB.
 
 This plugin is based on the official [Npgsql](https://github.com/npgsql/npgsql) project.
@@ -21,7 +21,7 @@ using Npgsql.CrateDb;
 using (var con = OpenConnection())
 {
     CrateDbDatabaseInfo.AddCrateDbSpecificTypeMappings(con.TypeMapper);
-    
+
     ...
 }
 ```
@@ -30,7 +30,7 @@ We are working on changes to get rid of this step.
 
 ## CrateDB object handler
 
-The CrateDB object handler enables reading and/or writing of arbitrary CLR objects from/to CrateDB columns with a data type of json or json array. 
+The CrateDB object handler enables reading and/or writing of arbitrary CLR objects from/to CrateDB columns with a data type of json or json array.
 
 To use this feature, import the `Npgsql.CrateDb` namespace and call the `UseCrateDbObjectHandler` extension method for the TypeMapper of your `NpgsqlConnection`:
 
@@ -43,7 +43,7 @@ using Npgsql.CrateDb;
 using (var con = OpenConnection())
 {
     con.TypeMapper.UseCrateDbObjectHandler();
-    
+
     ...
 }
 ```
@@ -56,11 +56,11 @@ Single objects can be read with the use of the `GetObject<T>(NpgsqlDataReader, i
 using (var command = new NpgsqlCommand("select my_json_column from my_table", con))
 using (var reader = command.ExecuteReader())
 {
-    if (reader.Read()) 
+    if (reader.Read())
     {
         // Returns an instance of type MyClrObject
         var obj = reader.GetObject<MyClrObject>(0);
-      
+
         ...
     }
 }
@@ -74,11 +74,11 @@ Object arrays can be read with the `GetObjectArray<T>(NpgsqlDataReader, int)` ex
 using (var command = new NpgsqlCommand("select my_json_array_column from my_table", con))
 using (var reader = command.ExecuteReader())
 {
-    if (reader.Read()) 
+    if (reader.Read())
     {
         // Returns an instance of type MyClrObject[]
         var arr = reader.GetObjectArray<MyClrObject>(0);
-      
+
         ...
     }
 }
@@ -91,12 +91,12 @@ With the help of the CrateDB object handler you can also set arbitrary CLR objec
 ```c#
 ...
 
-command.Parameters.AddWithValue("@obj_field", NpgsqlTypes.NpgsqlDbType.Json, 
+command.Parameters.AddWithValue("@obj_field", NpgsqlTypes.NpgsqlDbType.Json,
                                 new { inner = "Zoon" });
-command.Parameters.AddWithValue("@obj_array", NpgsqlTypes.NpgsqlDbType.Json, 
-                                new object[] { 
-                                    new { inner = "Zoon1" }, 
-                                    new { inner = "Zoon2" } 
+command.Parameters.AddWithValue("@obj_array", NpgsqlTypes.NpgsqlDbType.Json,
+                                new object[] {
+                                    new { inner = "Zoon1" },
+                                    new { inner = "Zoon2" }
                                 });
 ...
 ```
@@ -120,11 +120,11 @@ And that is pretty much what the `GetBytes(NpgsqlDataReader, int)` extension met
 using (var command = new NpgsqlCommand("select my_byte_array_column from my_table", con))
 using (var reader = command.ExecuteReader())
 {
-    if (reader.Read()) 
+    if (reader.Read())
     {
         // Returns an array of bytes
         var arr = reader.GetBytes(0);
-      
+
         ...
     }
 }
