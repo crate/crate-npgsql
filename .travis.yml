@@ -1,0 +1,34 @@
+language: csharp
+dist: trusty
+sudo: false
+mono: none
+dotnet: 2.1.302
+
+env:
+  global:
+    - NPGSQL_TEST_DB: '"Server=localhost;User ID=crate;Database=npgsql_tests;Timeout=0;Command Timeout=0"'
+
+before_install:
+  - sudo apt-get install -y dpkg
+  - sudo apt-get install -y openjdk-8-jdk
+  - wget https://cdn.crate.io/downloads/deb/DEB-GPG-KEY-crate
+  - sudo apt-key add DEB-GPG-KEY-crate
+  - sudo touch /etc/apt/sources.list.d/crate-stable.list
+  - echo "deb https://cdn.crate.io/downloads/deb/stable/ trusty main" | sudo tee -a /etc/apt/sources.list.d/crate-stable.list
+  - echo "deb-src https://cdn.crate.io/downloads/deb/stable/ trusty main" | sudo tee -a /etc/apt/sources.list.d/crate-stable.list
+  - sudo apt-get update
+  - sudo apt-get install -y crate
+addons:
+  apt:
+    update: true
+
+before_script:
+  - sudo service crate restart
+  - until curl --silent -XGET --fail http://localhost:4200; do printf '.'; sleep 1; done
+  - dotnet restore -v Minimal Npgsql.CrateDb.sln
+script:
+  - dotnet test "test/Npgsql.CrateDbTests/Npgsql.CrateDbTests.csproj" -c Debug -f netcoreapp2.1
+
+cache:
+  directories:
+    - $HOME/.nuget/packages
