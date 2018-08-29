@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>d2bb8aba-7599-4941-84e4-a10c9b277936</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>GacInstaller</OutputName>
+    <OutputType>Package</OutputType>
+    <Name>GacInstaller</Name>
+    <!-- We suppress ICE validation because apparently it requires an interactive account or admin privileges, which doesn't work in continuous integration -->
+    <SuppressValidation>true</SuppressValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+    <SuppressIces>ICE09;ICE32;ICE61</SuppressIces>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="crateio.ico" />
+    <Content Include="License.rtf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Strings1.wxl" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
+  <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
+    <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
+  </Target>
+  <Target Name="CreateWixProperties" BeforeTargets="Compile">
+    <!-- Get the programs assembly version from the .exe file -->
+    <GetAssemblyIdentity AssemblyFiles="..\..\npgsql\src\Npgsql\bin\$(Configuration)\net451\Npgsql.dll">
+      <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
+    </GetAssemblyIdentity>
+    <CreateProperty Value="%(AsmInfo.Version)">
+      <Output TaskParameter="Value" PropertyName="FullVersion" />
+    </CreateProperty>
+    <!-- The Assembly version contains 4 numbers, chop the last one off -->
+    <CreateProperty Value="$(FullVersion.Substring(0, $(FullVersion.LastIndexOf('.'))))">
+      <Output TaskParameter="Value" PropertyName="Version" />
+    </CreateProperty>
+    <!-- Store the version numbers in Version preprocessor variable -->
+    <CreateProperty Value="$(DefineConstants);Version=$(Version);FullVersion=$(FullVersion)">
+      <Output TaskParameter="Value" PropertyName="DefineConstants" />
+    </CreateProperty>
+    <!-- Store the assembly public key token in AssemblyPublicKeyToken preprocessor variable -->
+    <CreateProperty Value="$(DefineConstants);AssemblyPublicKeyToken=%(AsmInfo.PublicKeyToken)">
+      <Output TaskParameter="Value" PropertyName="DefineConstants" />
+    </CreateProperty>
+    <!-- Get the CrateDb PlugIn assembly version from the .dll file -->
+    <GetAssemblyIdentity AssemblyFiles="..\Npgsql.CrateDb\bin\$(Configuration)\net451\Npgsql.CrateDb.dll">
+      <Output TaskParameter="Assemblies" ItemName="PlugInAsmInfo" />
+    </GetAssemblyIdentity>
+    <CreateProperty Value="%(PlugInAsmInfo.Version)">
+      <Output TaskParameter="Value" PropertyName="PlugInFullVersion" />
+    </CreateProperty>
+    <!-- The Assembly version contains 4 numbers, chop the last one off -->
+    <CreateProperty Value="$(PlugInFullVersion.Substring(0, $(PlugInFullVersion.LastIndexOf('.'))))">
+      <Output TaskParameter="Value" PropertyName="PlugInVersion" />
+    </CreateProperty>
+    <!-- Store the version numbers in Version preprocessor variable -->
+    <CreateProperty Value="$(DefineConstants);PlugInVersion=$(PlugInVersion);PlugInFullVersion=$(PlugInFullVersion)">
+      <Output TaskParameter="Value" PropertyName="DefineConstants" />
+    </CreateProperty>
+    <!-- Name the .msi file after the solution platform and assembly version e.g TestService-x86-1.4.0.0.msi -->
+    <CreateProperty Value="Npgsql.CrateDB-$(PlugInVersion)">
+      <Output TaskParameter="Value" PropertyName="TargetName" />
+    </CreateProperty>
+    <!-- Name the .wixpdb file after the solution platform and assembly version e.g TestService-x86-1.4.0.0.msi -->
+    <CreateProperty Value="$(TargetName)$(TargetPdbExt)">
+      <Output TaskParameter="Value" PropertyName="TargetPdbName" />
+    </CreateProperty>
+  </Target>
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>
