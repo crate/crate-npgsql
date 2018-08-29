@@ -65,6 +65,11 @@ namespace Npgsql.CrateDb
         public CrateDbDatabaseInfo(NpgsqlConnection conn)
         {
             this.conn = conn;
+
+            if (Version.TryParse(conn.PostgresParameters["crate_version"], out Version v))
+            {
+                Version = v;
+            }
         }
 
         /// <summary>
