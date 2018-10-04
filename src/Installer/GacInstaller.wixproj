@@ -84,7 +84,7 @@
       <Output TaskParameter="Value" PropertyName="DefineConstants" />
     </CreateProperty>
     <!-- Store the plugin assembly public key token in PlugInAssemblyPublicKeyToken preprocessor variable -->
-    <CreateProperty Value="$(DefineConstants);PlugInAssemblyPublicKeyToken=%(AsmInfo.PublicKeyToken)">
+    <CreateProperty Value="$(DefineConstants);PlugInAssemblyPublicKeyToken=%(PlugInAsmInfo.PublicKeyToken)">
       <Output TaskParameter="Value" PropertyName="DefineConstants" />
     </CreateProperty>
     <!-- Name the .msi file after the solution platform and assembly version e.g TestService-x86-1.4.0.0.msi -->
