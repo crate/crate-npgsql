@@ -12,16 +12,6 @@
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes" />
     
-    <Feature Id="Npgsql.CrateDb"
-         Title="CrateDB-Plugin for Npgsql GAC Installation"
-         Level="1"
-         Description="Installs the CrateDB-PlugIn for Npgsql into the GAC. This is not the recommended way to use Npgsql.CrateDB (use nuget instead)."
-         Absent="allow"
-         AllowAdvertise="no"
-         Display="expand" >
-      <ComponentRef Id="Npgsql.CrateDb" />
-    </Feature>
-    
     <Feature Id="Npgsql"
          Title="Crate.io fork of Npgsql $(var.Version) GAC Installation"
          Level="1"
@@ -35,17 +25,30 @@
       <ComponentRef Id="System.Runtime.CompilerServices.Unsafe" />
       <ComponentRef Id="MachineConfig_x86" />
       <ComponentRef Id="MachineConfig_x64" />
+      <ComponentRef Id="Npgsql_config_file_component" />
+      
+      <Feature Id="Npgsql.CrateDb"
+           Title="CrateDB-Plugin for Npgsql GAC Installation"
+           Level="1"
+           Description="Installs the CrateDB-PlugIn for Npgsql into the GAC. This is not the recommended way to use Npgsql.CrateDB (use nuget instead)."
+           Absent="allow"
+           AllowAdvertise="no"
+           Display="expand">
+        <ComponentRef Id="Npgsql.CrateDb" />
+        <ComponentRef Id="RegisterCrateDbDatabaseInfoFactory" />
+      </Feature>
     </Feature>
 
     <Feature Id="NpgsqlPerformanceCounters"
-         Title="Npgsql Performance Counters"
-         Level="32767"
-         Description="Sets up the Npgsql performance counters, allowing you to track connections in applications."
-         Absent="allow"
-         AllowAdvertise="no"
-         Display="expand" >
+          Title="Npgsql Performance Counters"
+          Level="32767"
+          Description="Sets up the Npgsql performance counters, allowing you to track connections in applications."
+          Absent="allow"
+          AllowAdvertise="no"
+          Display="expand" >
       <ComponentRef Id="PerformanceCounters" />
     </Feature>
+    
 
     <UIRef Id="WixUI_FeatureTree" />
 
@@ -141,7 +144,30 @@
                 Source="..\Npgsql.CrateDb\bin\$(var.Configuration)\net451\Npgsql.CrateDb.dll"
                 KeyPath="yes"
                 Assembly=".net" />
-        </Component>        
+        </Component>
+      </Directory>
+      
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="NpgsqlAppData" Name="Npgsql">
+          
+          <Component Id="Npgsql_config_file_component" Guid="E42A5D68-54DF-4C87-B0D5-E922D75CD345" Permanent="no" >
+            <File Id="Npgsql_machine_config" Name="Npgsql_machine.config" Source="Npgsql_machine.config" KeyPath="yes" Vital="yes" />
+            <RemoveFolder Id="RemoveNpgsqlCommonAppDataFolder" On="uninstall" />
+          </Component>
+          
+          <Component Id="RegisterCrateDbDatabaseInfoFactory" Guid="B73B4541-EF03-479E-84F0-EE263BBE4331" Permanent="no">
+            <CreateFolder />
+            
+            <util:XmlConfig Id="RemovePreviousCrateDbDatabaseInfoFactoryRegistration" File="[#Npgsql_machine_config]" Action="delete" On="install" ElementPath="//config/databaseinfofactories" VerifyPath="//config/databaseinfofactories/add[\[]@name='CrateDb'[\]]" Node="element" Sequence="1"/>
+            
+            <util:XmlConfig Id="AddCrateDbDatabaseInfoFactoryRegistration" File="[#Npgsql_machine_config]" Action="create" On="install" ElementPath="//config/databaseinfofactories" Name="add" Node="element" VerifyPath="//config/databaseinfofactories/add[\[]@name='CrateDb'[\]]" Sequence="1">
+              <util:XmlConfig Id="DatabaseInfoFactoryNameAttribute" ElementId="AddCrateDbDatabaseInfoFactoryRegistration" Name="name" Value="CrateDb" File="[#Npgsql_machine_config]" />
+              <util:XmlConfig Id="DatabaseInfoFactoryValueAttribute" ElementId="AddCrateDbDatabaseInfoFactoryRegistration" Name="value" Value="Npgsql.CrateDb.CrateDbDatabaseInfoFactory, Npgsql.CrateDb, Version=$(var.PlugInFullVersion), Culture=neutral, PublicKeyToken=$(var.PlugInAssemblyPublicKeyToken)" File="[#Npgsql_machine_config]" />
+            </util:XmlConfig>
+            
+            <util:XmlConfig Id="RemoveCrateDbDatabaseInfoFactoryRegistration" File="[#Npgsql_machine_config]" Action="delete" On="uninstall" ElementPath="//config/databaseinfofactories" VerifyPath="//config/databaseinfofactories/add[\[]@name='CrateDb'[\]]" Node="element" Sequence="1"/>
+          </Component>        
+        </Directory>
       </Directory>
 
       <!-- http://stackoverflow.com/questions/791455/how-do-i-modify-machine-config-via-an-msi-package -->

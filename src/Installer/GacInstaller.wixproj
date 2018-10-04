@@ -38,6 +38,7 @@
   <ItemGroup>
     <Content Include="crateio.ico" />
     <Content Include="License.rtf" />
+    <Content Include="Npgsql_machine.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Strings1.wxl" />
@@ -78,8 +79,12 @@
     <CreateProperty Value="$(PlugInFullVersion.Substring(0, $(PlugInFullVersion.LastIndexOf('.'))))">
       <Output TaskParameter="Value" PropertyName="PlugInVersion" />
     </CreateProperty>
-    <!-- Store the version numbers in Version preprocessor variable -->
+    <!-- Store the plugin version numbers in Version preprocessor variable -->
     <CreateProperty Value="$(DefineConstants);PlugInVersion=$(PlugInVersion);PlugInFullVersion=$(PlugInFullVersion)">
+      <Output TaskParameter="Value" PropertyName="DefineConstants" />
+    </CreateProperty>
+    <!-- Store the plugin assembly public key token in PlugInAssemblyPublicKeyToken preprocessor variable -->
+    <CreateProperty Value="$(DefineConstants);PlugInAssemblyPublicKeyToken=%(AsmInfo.PublicKeyToken)">
       <Output TaskParameter="Value" PropertyName="DefineConstants" />
     </CreateProperty>
     <!-- Name the .msi file after the solution platform and assembly version e.g TestService-x86-1.4.0.0.msi -->
