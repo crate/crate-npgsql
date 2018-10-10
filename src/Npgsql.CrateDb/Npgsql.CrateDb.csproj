@@ -14,6 +14,9 @@
     <RepositoryUrl>https://github.com/crate/crate-npgsql.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>This plugin depends on a fork of the official Npgsql project. That fork contains the necessary changes to use Npgsql as a .NET data provider for CrateDB. We are working to get those changes merged upstream.</PackageReleaseNotes>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>Npgsql.CrateDb.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   
   <ItemGroup>

@@ -20,7 +20,7 @@ namespace Npgsql.CrateDb
         /// <returns></returns>
         public Task<NpgsqlDatabaseInfo> Load(NpgsqlConnection conn, NpgsqlTimeout timeout, bool async)
         {
-            if (conn.PostgresParameters.Any(p => String.Equals(p.Key, "crate_version")))
+            if (conn.PostgresParameters.ContainsKey("crate_version"))
             {
                 return Task.FromResult((NpgsqlDatabaseInfo)new CrateDbDatabaseInfo(conn));
             }
