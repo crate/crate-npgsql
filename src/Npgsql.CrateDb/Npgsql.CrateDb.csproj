@@ -17,6 +17,7 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>Npgsql.CrateDb.snk</AssemblyOriginatorKeyFile>
+    <Version>1.2.0</Version>
   </PropertyGroup>
   
   <ItemGroup>
