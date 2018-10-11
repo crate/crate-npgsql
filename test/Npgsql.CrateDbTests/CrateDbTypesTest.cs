@@ -128,7 +128,7 @@ namespace Npgsql.CrateDbTests
             using (var cmd = new NpgsqlCommand("select timestamp_field from test", con))
             {
                 var r = cmd.ExecuteScalar();
-                Assert.That(r, Is.EqualTo(new DateTime(2000, 1, 1).ToUniversalTime()));
+                Assert.That(r, Is.EqualTo(new DateTime(2018, 10, 11).ToUniversalTime()));
             }
         }
 

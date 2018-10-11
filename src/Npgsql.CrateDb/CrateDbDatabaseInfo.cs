@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql.PostgresTypes;
 using Npgsql.TypeHandlers;
+using Npgsql.TypeHandlers.DateTimeHandlers;
 using Npgsql.TypeMapping;
 using NpgsqlTypes;
 
@@ -70,6 +71,9 @@ namespace Npgsql.CrateDb
             {
                 Version = v;
             }
+            
+            HasIntegerDateTimes = conn.PostgresParameters.TryGetValue("integer_datetimes", out var intDateTimes) &&
+                intDateTimes == "on";
         }
 
         /// <summary>
@@ -140,7 +144,12 @@ namespace Npgsql.CrateDb
         /// Returns a boolean value that signals if the current database supports advisory lock functions.
         /// </summary>
         public override bool SupportsAdvisoryLocks => false;
-        
+        /// <summary>
+        /// Reports whether the backend uses the newer integer timestamp representation. 
+        /// CrateDB used floating point timestamps until version &lt;=3.0 and switched to integer datetimes with version &gt;= 3.1.
+        /// </summary>
+        public override bool HasIntegerDateTimes { get; protected set; } = true;
+
         static IEnumerable<NpgsqlTypeMapping> CrateDbSpecificTypeMappings()
         {
             // Map CrateDB varchar type to the Npgsql TextHandler.
@@ -162,7 +171,7 @@ namespace Npgsql.CrateDb
                 NpgsqlDbType = NpgsqlDbType.TimestampTz,
                 DbTypes = new[] { DbType.DateTime },
                 ClrTypes = new[] { typeof(DateTime) },
-                TypeHandlerFactory = new CrateDbTimestampHandlerFactory()
+                TypeHandlerFactory = new TimestampHandlerFactory()
             }
             .Build();
         }

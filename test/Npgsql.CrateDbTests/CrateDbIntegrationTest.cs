@@ -70,7 +70,7 @@ namespace Npgsql.CrateDbTests
                     cmd.Parameters.AddWithValue("@object_field", NpgsqlTypes.NpgsqlDbType.Json, "{ \"inner\": \"Zoon\" }");
                     //cmd.Parameters.AddWithValue("@object_field", NpgsqlTypes.NpgsqlDbType.Json, new { inner = "Zoon" });
 
-                    cmd.Parameters.AddWithValue("@timestamp_field", new DateTime(2000, 1, 1).ToUniversalTime());
+                    cmd.Parameters.AddWithValue("@timestamp_field", new DateTime(2018, 10, 11).ToUniversalTime());
                     cmd.Parameters.AddWithValue("@ip_field", "127.0.0.1");
                     cmd.Parameters.AddWithValue("@geo_point_field", new double[] { 9.7419021d, 47.4048045d });
                     cmd.Parameters.AddWithValue("@geo_shape_field", "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))");
