@@ -7,7 +7,7 @@
     <Copyright>Copyright 2018 © Crate.io</Copyright>
     <Company>Crate.io</Company>
     <PackageTags>npgsql crate cratedb ado ado.net database sql</PackageTags>
-    <TargetFrameworks>net45;net451;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <WarningsAsErrors>true</WarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageProjectUrl>https://github.com/crate/crate-npgsql</PackageProjectUrl>
