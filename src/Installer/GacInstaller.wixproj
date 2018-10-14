@@ -50,7 +50,7 @@
   </Target>
   <Target Name="CreateWixProperties" BeforeTargets="Compile">
     <!-- Get the programs assembly version from the .exe file -->
-    <GetAssemblyIdentity AssemblyFiles="..\..\npgsql\src\Npgsql\bin\$(Configuration)\net451\Npgsql.dll">
+    <GetAssemblyIdentity AssemblyFiles="..\..\npgsql\src\Npgsql\bin\$(Configuration)\net452\Npgsql.dll">
       <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
     </GetAssemblyIdentity>
     <CreateProperty Value="%(AsmInfo.Version)">
@@ -69,7 +69,7 @@
       <Output TaskParameter="Value" PropertyName="DefineConstants" />
     </CreateProperty>
     <!-- Get the CrateDb PlugIn assembly version from the .dll file -->
-    <GetAssemblyIdentity AssemblyFiles="..\Npgsql.CrateDb\bin\$(Configuration)\net451\Npgsql.CrateDb.dll">
+    <GetAssemblyIdentity AssemblyFiles="..\Npgsql.CrateDb\bin\$(Configuration)\net452\Npgsql.CrateDb.dll">
       <Output TaskParameter="Assemblies" ItemName="PlugInAsmInfo" />
     </GetAssemblyIdentity>
     <CreateProperty Value="%(PlugInAsmInfo.Version)">
