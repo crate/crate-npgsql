@@ -110,28 +110,28 @@
         <Component Id="Npgsql" Guid="f842fa5e-5623-41aa-80aa-6d2e5bf97435">
           <File Id="Npgsql"
                 Name="Npgsql.dll"
-                Source="..\..\npgsql\src\npgsql\bin\$(var.Configuration)\net452\Npgsql.dll"
+                Source="..\..\npgsql\src\npgsql\bin\$(var.Configuration)\net451\Npgsql.dll"
                 KeyPath="yes"
                 Assembly=".net" />
         </Component>
         <Component Id="System.Threading.Tasks.Extensions" Guid="d978c06f-7e7f-4865-858e-b9eee77d7470">
           <File Id="System.Threading.Tasks.Extensions"
                 Name="System.Threading.Tasks.Extensions.dll"
-                Source="..\..\npgsql\src\npgsql\bin\$(var.Configuration)\net452\System.Threading.Tasks.Extensions.dll"
+                Source="..\..\npgsql\src\npgsql\bin\$(var.Configuration)\net451\System.Threading.Tasks.Extensions.dll"
                 KeyPath="yes"
                 Assembly=".net" />
         </Component>
         <Component Id="System.ValueTuple" Guid="07cfe929-4a0c-4b90-87df-37cceaa970b8">
           <File Id="System.ValueTuple"
                 Name="System.ValueTuple.dll"
-                Source="..\..\npgsql\src\npgsql\bin\$(var.Configuration)\net452\System.ValueTuple.dll"
+                Source="..\..\npgsql\src\npgsql\bin\$(var.Configuration)\net451\System.ValueTuple.dll"
                 KeyPath="yes"
                 Assembly=".net" />
         </Component>
         <Component Id="System.Runtime.CompilerServices.Unsafe" Guid="36194b8d-d2af-4dd6-a9a0-fb6942502e53">
           <File Id="System.Runtime.CompilerServices.Unsafe"
                 Name="System.Runtime.CompilerServices.Unsafe.dll"
-                Source="..\..\npgsql\src\npgsql\bin\$(var.Configuration)\net452\System.Runtime.CompilerServices.Unsafe.dll"
+                Source="..\..\npgsql\src\npgsql\bin\$(var.Configuration)\net451\System.Runtime.CompilerServices.Unsafe.dll"
                 KeyPath="yes"
                 Assembly=".net" />
         </Component>        
@@ -141,7 +141,7 @@
         <Component Id="Npgsql.CrateDb" Guid="55ED357D-8B7F-49FE-8AF3-F63D93D15577">
           <File Id="Npgsql.CrateDb"
                 Name="Npgsql.CrateDb.dll"
-                Source="..\Npgsql.CrateDb\bin\$(var.Configuration)\net452\Npgsql.CrateDb.dll"
+                Source="..\Npgsql.CrateDb\bin\$(var.Configuration)\net451\Npgsql.CrateDb.dll"
                 KeyPath="yes"
                 Assembly=".net" />
         </Component>
