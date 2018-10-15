@@ -4,9 +4,9 @@ sudo: false
 mono: none
 dotnet: 2.1.302
 
-# env:
-#   global:
-#     - NPGSQL_TEST_DB: '"Server=localhost;User ID=crate;Database=npgsql_tests;Timeout=0;Command Timeout=0"'
+env:
+  global:
+    - NPGSQL_TEST_DB: '"Host=localhost;Username=crate;Database=npgsql_tests;"'
 
 before_install:
   - sudo apt-get install -y dpkg
