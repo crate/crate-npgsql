@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.2.3</VersionPrefix>
     <Description>A plugin that extends Npgsql to enable using npgsql as a .NET data provider for CrateDB.</Description>
     <Authors>Andreas Pircher;Michael Beer</Authors>
     <Copyright>Copyright 2018 © Crate.io</Copyright>
     <Company>Crate.io</Company>
     <PackageTags>npgsql crate cratedb ado ado.net database sql</PackageTags>
-    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net45;net451;netstandard2.0</TargetFrameworks>
     <WarningsAsErrors>true</WarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageProjectUrl>https://github.com/crate/crate-npgsql</PackageProjectUrl>
@@ -17,7 +17,7 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>Npgsql.CrateDb.snk</AssemblyOriginatorKeyFile>
-    <Version>1.2.1</Version>
+    <Version>1.2.3.0</Version>
     <PackageIconUrl>https://crate.io/wp-content/uploads/2017/11/favicon.png</PackageIconUrl>
   </PropertyGroup>
   
