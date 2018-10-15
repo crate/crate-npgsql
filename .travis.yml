@@ -23,7 +23,6 @@ addons:
     update: true
 
 before_script:
-  - sudo service crate start
   - until curl --silent -XGET --fail http://localhost:4200; do printf '.'; sleep 1; done
   - dotnet restore -v Minimal Npgsql.CrateDb.sln
 script:
