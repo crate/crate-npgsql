@@ -1,0 +1,67 @@
+.. _connect:
+
+==================
+Connect to CrateDB
+==================
+
+Connect to CrateDB using the :ref:`CrateDB Npgsql Plugin <index>`.
+
+.. rubric:: Table of Contents
+
+.. contents::
+   :local:
+
+Setup
+=====
+
+Before connecting to CrateDB, you must set up the plugin by registering a
+special CrateDB `DatabaseInfoFactory`_ subclass, like so:
+
+.. code-block:: csharp
+
+    NpgsqlDatabaseInfo.RegisterFactory(new CrateDbDatabaseInfoFactory());
+
+
+The Basics
+==========
+
+Connect to CrateDB using a standard `NpgsqlConnection`_ object, like so:
+
+.. code-block:: csharp
+
+    var connString = "Host=127.0.0.1;Username=crate";
+
+    using (var conn = new NpgsqlConnection(connString))
+    {
+        conn.Open();
+    }
+
+Here, we are connecting as the ``crate`` user to a CrateDB node listening on
+``127.0.0.1`` (localhost).
+
+.. SEEALSO::
+
+    A definitive `connection string parameters`_ reference.
+
+.. NOTE::
+
+    The default CrateDB schema is ``doc``, and if you do not specify a schema
+    (using the ``Database`` connection parameter) this is what will be used.
+
+    However, once connected, you can query any schema you like by specifying it
+    in the query.
+
+Next Steps
+==========
+
+Use the standard `Npgsql documentation`_ for the rest of your setup process.
+
+.. SEEALSO::
+
+    The plugin :ref:`data-types` appendix.
+
+.. _Npgsql documentation: https://www.npgsql.org/doc/index.html
+.. _connection string parameters: https://www.npgsql.org/doc/connection-string-parameters.html
+.. _DatabaseInfoFactory: https://www.npgsql.org/doc/api/Npgsql.NpgsqlDatabaseInfo.html
+.. _usual Npgsql way: https://www.npgsql.org/doc/index.html
+.. _NpgsqlConnection: https://www.npgsql.org/doc/api/Npgsql.NpgsqlConnection.html
