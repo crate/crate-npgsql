@@ -111,7 +111,7 @@ referencing columns with a JSON or JSON array `data type`_. For example:
                                     });
     ...
 
-Internally, `Newtonsoft.Json` is used to serialize objects to JSON strings and
+Internally, `Newtonsoft.Json`_ is used to serialize objects to JSON strings and
 vice versa.
 
 .. _byte-arrays:
