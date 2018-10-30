@@ -4,7 +4,7 @@ CrateDB Npgsql Plugin
 
 |build-status| |docs|
 
-A plugin for `Npgsql`_ that provides support for `CrateDB`_.
+Plugin for `Npgsql`_ that provides support for `CrateDB`_.
 
 For now, this plugin depends on a `fork`_ of the official `Npgsql project`_ to
 work. We are, however, working to get the necessary changes merged in upstream.
