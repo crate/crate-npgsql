@@ -5,7 +5,7 @@ python:
 sudo:
   false
 install:
-  - sh bootstrap.sh
+  - sh bin/bootstrap.sh
 script:
   - bin/sphinx
 notifications:
