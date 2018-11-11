@@ -146,29 +146,6 @@
                 Assembly=".net" />
         </Component>
       </Directory>
-      
-      <Directory Id="CommonAppDataFolder">
-        <Directory Id="NpgsqlAppData" Name="Npgsql">
-          
-          <Component Id="Npgsql_config_file_component" Guid="E42A5D68-54DF-4C87-B0D5-E922D75CD345" Permanent="no" >
-            <File Id="Npgsql_machine_config" Name="Npgsql_machine.config" Source="Npgsql_machine.config" KeyPath="yes" Vital="yes" />
-            <RemoveFolder Id="RemoveNpgsqlCommonAppDataFolder" On="uninstall" />
-          </Component>
-          
-          <Component Id="RegisterCrateDbDatabaseInfoFactory" Guid="B73B4541-EF03-479E-84F0-EE263BBE4331" Permanent="no">
-            <CreateFolder />
-            
-            <util:XmlConfig Id="RemovePreviousCrateDbDatabaseInfoFactoryRegistration" File="[#Npgsql_machine_config]" Action="delete" On="install" ElementPath="//config/databaseinfofactories" VerifyPath="//config/databaseinfofactories/add[\[]@name='CrateDb'[\]]" Node="element" Sequence="1"/>
-            
-            <util:XmlConfig Id="AddCrateDbDatabaseInfoFactoryRegistration" File="[#Npgsql_machine_config]" Action="create" On="install" ElementPath="//config/databaseinfofactories" Name="add" Node="element" VerifyPath="//config/databaseinfofactories/add[\[]@name='CrateDb'[\]]" Sequence="1">
-              <util:XmlConfig Id="DatabaseInfoFactoryNameAttribute" ElementId="AddCrateDbDatabaseInfoFactoryRegistration" Name="name" Value="CrateDb" File="[#Npgsql_machine_config]" />
-              <util:XmlConfig Id="DatabaseInfoFactoryValueAttribute" ElementId="AddCrateDbDatabaseInfoFactoryRegistration" Name="value" Value="Npgsql.CrateDb.CrateDbDatabaseInfoFactory, Npgsql.CrateDb, Version=$(var.PlugInFullVersion), Culture=neutral, PublicKeyToken=$(var.PlugInAssemblyPublicKeyToken)" File="[#Npgsql_machine_config]" />
-            </util:XmlConfig>
-            
-            <util:XmlConfig Id="RemoveCrateDbDatabaseInfoFactoryRegistration" File="[#Npgsql_machine_config]" Action="delete" On="uninstall" ElementPath="//config/databaseinfofactories" VerifyPath="//config/databaseinfofactories/add[\[]@name='CrateDb'[\]]" Node="element" Sequence="1"/>
-          </Component>        
-        </Directory>
-      </Directory>
 
       <!-- http://stackoverflow.com/questions/791455/how-do-i-modify-machine-config-via-an-msi-package -->
       <!-- http://wixtoolset.org/documentation/manual/v3/xsd/util/xmlconfig.html -->
@@ -193,16 +170,16 @@
 
                   <?define MachineConfigPath86 = "[WindowsFolder]Microsoft.NET\Framework\v4.0.30319\CONFIG\machine.config" ?>
 
-                  <util:XmlConfig Id="DeletePreviousAddElement32" File="$(var.MachineConfigPath86)" Action="delete" On="install" ElementPath="//configuration/system.data/DbProviderFactories" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Npgsql'[\]]" Node="element" Sequence="1"/>
+                  <util:XmlConfig Id="DeletePreviousAddElement32" File="$(var.MachineConfigPath86)" Action="delete" On="install" ElementPath="//configuration/system.data/DbProviderFactories" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Crate'[\]]" Node="element" Sequence="1"/>
 
-                  <util:XmlConfig Id="CreateAddElement32" File="$(var.MachineConfigPath86)" Action="create" On="install" ElementPath="//configuration/system.data/DbProviderFactories" Name="add" Node="element" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Npgsql'[\]]" Sequence="1">
-                    <util:XmlConfig Id="NameAttribute32" ElementId="CreateAddElement32" Name="name" Value="Npgsql Data Provider" File="$(var.MachineConfigPath86)" />
-                    <util:XmlConfig Id="InvariantAttribute32" ElementId="CreateAddElement32" Name="invariant" Value="Npgsql" File="$(var.MachineConfigPath86)" />
-                    <util:XmlConfig Id="DescriptionAttribute32" ElementId="CreateAddElement32" Name="description" Value=".NET Data Provider for PostgreSQL" File="$(var.MachineConfigPath86)" />
-                    <util:XmlConfig Id="TypeAttribute32" ElementId="CreateAddElement32" Name="type" Value="Npgsql.NpgsqlFactory, Npgsql, Version=$(var.FullVersion), Culture=neutral, PublicKeyToken=$(var.AssemblyPublicKeyToken)" File="$(var.MachineConfigPath86)" />
+                  <util:XmlConfig Id="CreateAddElement32" File="$(var.MachineConfigPath86)" Action="create" On="install" ElementPath="//configuration/system.data/DbProviderFactories" Name="add" Node="element" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Crate'[\]]" Sequence="1">
+                    <util:XmlConfig Id="NameAttribute32" ElementId="CreateAddElement32" Name="name" Value="Crate Data Provider" File="$(var.MachineConfigPath86)" />
+                    <util:XmlConfig Id="InvariantAttribute32" ElementId="CreateAddElement32" Name="invariant" Value="Crate" File="$(var.MachineConfigPath86)" />
+                    <util:XmlConfig Id="DescriptionAttribute32" ElementId="CreateAddElement32" Name="description" Value=".NET Data Provider for CrateDB" File="$(var.MachineConfigPath86)" />
+                    <util:XmlConfig Id="TypeAttribute32" ElementId="CreateAddElement32" Name="type" Value="Npgsql.CrateDb.CrateFactory, Npgsql.CrateDb, Version=$(var.FullVersion), Culture=neutral, PublicKeyToken=$(var.AssemblyPublicKeyToken)" File="$(var.MachineConfigPath86)" />
                   </util:XmlConfig>
 
-                  <util:XmlConfig Id="DeleteAddElement32" File="$(var.MachineConfigPath86)" Action="delete" On="uninstall" ElementPath="//configuration/system.data/DbProviderFactories" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Npgsql'[\]]" Node="element" Sequence="1"/>
+                  <util:XmlConfig Id="DeleteAddElement32" File="$(var.MachineConfigPath86)" Action="delete" On="uninstall" ElementPath="//configuration/system.data/DbProviderFactories" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Crate'[\]]" Node="element" Sequence="1"/>
 
                 </Component>
               </Directory>
@@ -218,16 +195,16 @@
 
                   <?define MachineConfigPath64 = "[WindowsFolder]Microsoft.NET\Framework64\v4.0.30319\CONFIG\machine.config" ?>
 
-                  <util:XmlConfig Id="DeletePreviousAddElement64" File="$(var.MachineConfigPath64)" Action="delete" On="install" ElementPath="//configuration/system.data/DbProviderFactories" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Npgsql'[\]]" Node="element" Sequence="1"/>
+                  <util:XmlConfig Id="DeletePreviousAddElement64" File="$(var.MachineConfigPath64)" Action="delete" On="install" ElementPath="//configuration/system.data/DbProviderFactories" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Crate'[\]]" Node="element" Sequence="1"/>
 
-                  <util:XmlConfig Id="CreateAddElement64" File="$(var.MachineConfigPath64)" Action="create" On="install" ElementPath="//configuration/system.data/DbProviderFactories" Name="add" Node="element" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Npgsql'[\]]" Sequence="1">
-                    <util:XmlConfig Id="NameAttribute64" ElementId="CreateAddElement64" Name="name" Value="Npgsql Data Provider" File="$(var.MachineConfigPath64)" />
-                    <util:XmlConfig Id="InvariantAttribute64" ElementId="CreateAddElement64" Name="invariant" Value="Npgsql" File="$(var.MachineConfigPath64)" />
+                  <util:XmlConfig Id="CreateAddElement64" File="$(var.MachineConfigPath64)" Action="create" On="install" ElementPath="//configuration/system.data/DbProviderFactories" Name="add" Node="element" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Crate'[\]]" Sequence="1">
+                    <util:XmlConfig Id="NameAttribute64" ElementId="CreateAddElement64" Name="name" Value="Crate Data Provider" File="$(var.MachineConfigPath64)" />
+                    <util:XmlConfig Id="InvariantAttribute64" ElementId="CreateAddElement64" Name="invariant" Value="Crate" File="$(var.MachineConfigPath64)" />
                     <util:XmlConfig Id="DescriptionAttribute64" ElementId="CreateAddElement64" Name="description" Value=".NET Data Provider for PostgreSQL" File="$(var.MachineConfigPath64)" />
-                    <util:XmlConfig Id="TypeAttribute64" ElementId="CreateAddElement64" Name="type" Value="Npgsql.NpgsqlFactory, Npgsql, Version=$(var.FullVersion), Culture=neutral, PublicKeyToken=$(var.AssemblyPublicKeyToken)" File="$(var.MachineConfigPath64)" />
+                    <util:XmlConfig Id="TypeAttribute64" ElementId="CreateAddElement64" Name="type" Value="Npgsql.CrateDb.CrateFactory, Npgsql.CrateDb, Version=$(var.FullVersion), Culture=neutral, PublicKeyToken=$(var.AssemblyPublicKeyToken)" File="$(var.MachineConfigPath64)" />
                   </util:XmlConfig>
 
-                  <util:XmlConfig Id="DeleteAddElement64" File="$(var.MachineConfigPath64)" Action="delete" On="uninstall" ElementPath="//configuration/system.data/DbProviderFactories" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Npgsql'[\]]" Node="element" Sequence="1"/>
+                  <util:XmlConfig Id="DeleteAddElement64" File="$(var.MachineConfigPath64)" Action="delete" On="uninstall" ElementPath="//configuration/system.data/DbProviderFactories" VerifyPath="//configuration/system.data/DbProviderFactories/add[\[]@invariant='Crate'[\]]" Node="element" Sequence="1"/>
 
                 </Component>
               </Directory>
