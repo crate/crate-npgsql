@@ -14,8 +14,8 @@ Install and get started with the :ref:`CrateDB Npgsql Plugin <index>`.
 Install
 =======
 
-The Npgsql plugin is made available as `a Nuget package`_. Follow the
-appropriate Nuget instructions to get the plugin installed.
+The Npgsql plugin is made available as `Npgsql.CrateDB Nuget package`_. Follow
+the appropriate Nuget instructions to get the plugin installed.
 
 .. CAUTION::
 
@@ -44,7 +44,7 @@ Next Steps
 Once the plugin is installed, you probably want to :ref:`connect to CrateDB
 <connect>`.
 
-.. _a Nuget package: https://www.nuget.org/packages/Npgsql.CrateDb/
+.. _Npgsql.CrateDB Nuget package: https://www.nuget.org/packages/Npgsql.CrateDb/
 .. _dotnet CLI: https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-using-the-dotnet-cli
 .. _fork: https://github.com/crate/npgsql
 .. _Global Assembly Cache: https://docs.microsoft.com/en-us/dotnet/framework/app-domains/gac
