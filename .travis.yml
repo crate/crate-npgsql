@@ -1,3 +1,4 @@
+---
 language: python
 cache: pip
 python:
@@ -5,7 +6,7 @@ python:
 sudo:
   false
 install:
-  - sh bin/bootstrap.sh
+  - sh bootstrap.sh
 script:
   - bin/sphinx
 notifications:
