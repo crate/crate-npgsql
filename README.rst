@@ -22,10 +22,8 @@ Help
 
 Looking for more help?
 
-- Read `the hosted documentation`_
-- Check `StackOverflow`_ for common problems
-- Chat with us on `Slack`_
-- Get `paid support`_
+- Read the `project docs`_
+- Check out our `support channels`_
 
 .. _.NET: https://www.microsoft.com/net
 .. _contribution docs: CONTRIBUTING.rst
@@ -35,10 +33,8 @@ Looking for more help?
 .. _fork: https://github.com/crate/npgsql
 .. _Npgsql project: https://github.com/npgsql/npgsql
 .. _Npgsql: https://www.npgsql.org/
-.. _paid support: https://crate.io/pricing/
-.. _Slack: https://crate.io/docs/support/slackin/
-.. _StackOverflow: https://stackoverflow.com/tags/crate
-.. _the hosted documentation: https://crate.io/docs/clients/npgsql/en/latest/
+.. _project docs: https://crate.io/docs/clients/npgsql/en/latest/
+.. _support channels: https://crate.io/support/
 
 .. |build-status| image:: https://img.shields.io/travis/crate/crate-npgsql.svg?style=flat
     :alt: build status
