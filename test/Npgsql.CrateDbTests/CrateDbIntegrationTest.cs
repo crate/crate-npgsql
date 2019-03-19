@@ -35,7 +35,7 @@ namespace Npgsql.CrateDbTests
                         ip_field ip,
                         geo_point_field geo_point,
                         geo_shape_field geo_shape
-                      ) clustered by (id) into 1 shards with (number_of_replicas=0)";
+                      ) clustered by (id) into 1 shards with (number_of_replicas=0, column_policy = 'dynamic')";
 
                     cmd.ExecuteNonQuery();
                 }
@@ -66,10 +66,7 @@ namespace Npgsql.CrateDbTests
                     cmd.Parameters.AddWithValue("@long_field", 120000000000L);
                     cmd.Parameters.AddWithValue("@float_field", 1.4f);
                     cmd.Parameters.AddWithValue("@double_field", 3.456789);
-
                     cmd.Parameters.AddWithValue("@object_field", NpgsqlTypes.NpgsqlDbType.Json, "{ \"inner\": \"Zoon\" }");
-                    //cmd.Parameters.AddWithValue("@object_field", NpgsqlTypes.NpgsqlDbType.Json, new { inner = "Zoon" });
-
                     cmd.Parameters.AddWithValue("@timestamp_field", new DateTime(2018, 10, 11).ToUniversalTime());
                     cmd.Parameters.AddWithValue("@ip_field", "127.0.0.1");
                     cmd.Parameters.AddWithValue("@geo_point_field", new double[] { 9.7419021d, 47.4048045d });
@@ -115,7 +112,7 @@ namespace Npgsql.CrateDbTests
                         timestamp_array array(timestamp),
                         obj_array array(object),
                         geo_shape_array array(geo_shape)
-                      ) clustered by (id) into 1 shards with (number_of_replicas=0)";
+                      ) clustered by (id) into 1 shards with (number_of_replicas=0, column_policy = 'dynamic')";
 
                     cmd.ExecuteNonQuery();
                 }
@@ -147,7 +144,6 @@ namespace Npgsql.CrateDbTests
                     cmd.Parameters.AddWithValue("@timestamp_array", new DateTime[] { new DateTime(2000, 1, 1).ToUniversalTime(), new DateTime(1970, 1, 1).ToUniversalTime() });
                     cmd.Parameters.AddWithValue("@ip_array", new string[] { "127.142.132.9", "127.0.0.1" });
                     cmd.Parameters.AddWithValue("@obj_array", NpgsqlTypes.NpgsqlDbType.Json, "[ { \"inner\": \"Zoon1\" }, { \"inner\": \"Zoon2\" } ]");
-                    //cmd.Parameters.AddWithValue("@obj_array", NpgsqlTypes.NpgsqlDbType.Json, new object[] { new { inner = "Zoon1" }, new { inner = "Zoon2" } });
                     cmd.Parameters.AddWithValue("@geo_shape_array", new string[] { "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))", "POLYGON ((40 20, 50 50, 30 50, 20 30, 40 20))" });
                     cmd.ExecuteNonQuery();
 
