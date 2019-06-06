@@ -22,7 +22,7 @@ special CrateDB `DatabaseInfoFactory`_ subclass, like so:
     NpgsqlDatabaseInfo.RegisterFactory(new CrateDbDatabaseInfoFactory());
 
 
-The Basics
+The basics
 ==========
 
 Connect to CrateDB using a standard `NpgsqlConnection`_ object, like so:
@@ -51,7 +51,7 @@ Here, we are connecting as the ``crate`` user to a CrateDB node listening on
     However, once connected, you can query any schema you like by specifying it
     in the query.
 
-Next Steps
+Next steps
 ==========
 
 Use the standard `Npgsql documentation`_ for the rest of your setup process.

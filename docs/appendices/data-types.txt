@@ -14,7 +14,7 @@ Data Types
 Objects
 =======
 
-The CrateDB Object Handler
+The CrateDB object handler
 --------------------------
 
 This plugin provides a CrateDB object handler that allows you to read and write
@@ -40,7 +40,7 @@ To use this feature, import the ``Npgsql.CrateDb`` namespace and call the
 Reading
 -------
 
-Reading Objects
+Reading objects
 ...............
 
 Objects can be read with the ``GetObject<T>(NpgsqlDataReader, int)`` extension
@@ -65,7 +65,7 @@ method, like so:
     The ``GetObject<T>(NpgsqlDataReader, int)`` extension method is in the
     ``Npgsql.CrateDb`` namespace.
 
-Reading Object Arrays
+Reading object arrays
 .....................
 
 Object arrays can be read with the ``GetObjectArray<T>(NpgsqlDataReader, int)``
@@ -92,7 +92,7 @@ extension method, like so:
     The ``GetObjectArray<T>(NpgsqlDataReader, int)`` extension method is in the
     ``Npgsql.CrateDb`` namespace.
 
-Writing Objects and Object Arrays
+Writing objects and object arrays
 ---------------------------------
 
 You can set arbitrary CLR objects and arrays as values for parameters
@@ -116,7 +116,7 @@ vice versa.
 
 .. _byte-arrays:
 
-Byte Arrays
+Byte arrays
 ===========
 
 A CrateDB `byte array`_ is read into .NET as an array of either ``int2`` or
