@@ -38,7 +38,7 @@ the appropriate Nuget instructions to get the plugin installed.
     install Npgsql with the CrateDB plugin into your `Global Assembly Cache`_
     (GAC) with our custom `Npgsql Installer`_.
 
-Next Steps
+Next steps
 ==========
 
 Once the plugin is installed, you probably want to :ref:`connect to CrateDB
