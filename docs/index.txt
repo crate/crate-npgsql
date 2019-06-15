@@ -1,8 +1,8 @@
 .. _index:
 
-=====================
-CrateDB Npgsql Plugin
-=====================
+======================
+CrateDB Npgsql plug-in
+======================
 
 A plugin for `Npgsql`_ that provides support for `CrateDB`_.
 
@@ -18,7 +18,7 @@ A plugin for `Npgsql`_ that provides support for `CrateDB`_.
     The CrateDB Npgsql Plugin is an open source project and is `hosted on
     GitHub`_.
 
-.. rubric:: Table of Contents
+.. rubric:: Table of contents
 
 .. toctree::
    :maxdepth: 2

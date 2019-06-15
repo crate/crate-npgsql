@@ -6,7 +6,7 @@ Connect to CrateDB
 
 Connect to CrateDB using the :ref:`CrateDB Npgsql Plugin <index>`.
 
-.. rubric:: Table of Contents
+.. rubric:: Table of contents
 
 .. contents::
    :local:
