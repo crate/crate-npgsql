@@ -1,12 +1,12 @@
 .. _getting-started:
 
 ===============
-Getting Started
+Getting started
 ===============
 
 Install and get started with the :ref:`CrateDB Npgsql Plugin <index>`.
 
-.. rubric:: Table of Contents
+.. rubric:: Table of contents
 
 .. contents::
    :local:
