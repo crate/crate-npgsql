@@ -1,7 +1,7 @@
 .. _index:
 
 ======================
-CrateDB Npgsql plug-in
+CrateDB Npgsql Plug-In
 ======================
 
 A plugin for `Npgsql`_ that provides support for `CrateDB`_.
