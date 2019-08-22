@@ -28,7 +28,8 @@ namespace Npgsql.CrateDb
             { "int8", 20 },
             { "timestamptz", 1184 },
             { "float8", 701 },
-            { "varchar", 1043 }
+            { "varchar", 1043 },
+            { "point", 600 }
         };
 
         static readonly IDictionary<string, uint> CrateDbArrayTypes = new Dictionary<string, uint>
@@ -42,7 +43,8 @@ namespace Npgsql.CrateDb
             { "_int8", 1016 },
             { "_timestamptz", 1185 },
             { "_float8", 1022 },
-            { "_varchar", 1015 }
+            { "_varchar", 1015 },
+            { "_point", 1017 }
         };
 
         static readonly IDictionary<string, string> PgTypeNameToInternalName = new Dictionary<string, string>
@@ -71,7 +73,7 @@ namespace Npgsql.CrateDb
             {
                 Version = v;
             }
-            
+
             HasIntegerDateTimes = conn.PostgresParameters.TryGetValue("integer_datetimes", out var intDateTimes) &&
                 intDateTimes == "on";
         }

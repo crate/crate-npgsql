@@ -111,7 +111,8 @@ namespace Npgsql.CrateDbTests
                         double_array array(double),
                         timestamp_array array(timestamp),
                         obj_array array(object),
-                        geo_shape_array array(geo_shape)
+                        geo_shape_array array(geo_shape),
+                        geo_point_array array(geo_point)
                       ) clustered by (id) into 1 shards with (number_of_replicas=0, column_policy = 'dynamic')";
 
                     cmd.ExecuteNonQuery();
@@ -127,10 +128,10 @@ namespace Npgsql.CrateDbTests
                 {
                     cmd.CommandText = @"insert into arrayTest (id, str_array, bool_array, byte_array, 
                         short_array, integer_array, long_array, float_array, double_array, timestamp_array, 
-                        ip_array, obj_array, geo_shape_array) values 
+                        ip_array, obj_array, geo_shape_array, geo_point_array) values 
                        (@id, @str_array, @bool_array, @byte_array, 
                         @short_array, @integer_array, @long_array, @float_array, @double_array, @timestamp_array, 
-                        @ip_array, @obj_array, @geo_shape_array)";
+                        @ip_array, @obj_array, @geo_shape_array, @geo_point_array)";
 
                     cmd.Parameters.AddWithValue("@id", 1);
                     cmd.Parameters.AddWithValue("@str_array", new string[] { "a", "b", "c", "d" });
@@ -145,6 +146,7 @@ namespace Npgsql.CrateDbTests
                     cmd.Parameters.AddWithValue("@ip_array", new string[] { "127.142.132.9", "127.0.0.1" });
                     cmd.Parameters.AddWithValue("@obj_array", NpgsqlTypes.NpgsqlDbType.Json, "[ { \"inner\": \"Zoon1\" }, { \"inner\": \"Zoon2\" } ]");
                     cmd.Parameters.AddWithValue("@geo_shape_array", new string[] { "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))", "POLYGON ((40 20, 50 50, 30 50, 20 30, 40 20))" });
+                    cmd.Parameters.AddWithValue("@geo_point_array", new string[] { "POINT ( 2.23221 3.2323232 )", "POINT ( 4.23221 5.2323232 )" });
                     cmd.ExecuteNonQuery();
 
                     cmd.CommandText = "refresh table arrayTest";
@@ -161,6 +163,48 @@ namespace Npgsql.CrateDbTests
                 {
                     cmd.CommandText = @"drop table if exists arrayTest";
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        protected void CleanUpTestTables()
+        {
+            CleanUp("npgsql_tests", "test");
+            CleanUp("npgsql_tests", "arraytest");
+        }
+
+        private void CleanUp(string schema, string table)
+        {
+
+            using (var con = OpenConnection())
+            {
+                var tableExistsCommand = @"SELECT Count(*) FROM (
+                                           SELECT 1 AS a
+                                           FROM   information_schema.tables 
+                                           WHERE  table_schema = @schema
+                                           AND    table_name = @table
+                                           ) A;";
+                using (var cmd = new NpgsqlCommand(tableExistsCommand, con))
+                {
+                    cmd.Parameters.AddWithValue("@schema", schema);
+                    cmd.Parameters.AddWithValue("@table", table);
+                    var r = cmd.ExecuteScalar();
+                    if (((long)r) > 0)
+                    {
+                        DeleteAllFromTable(schema, table);
+                    }
+                }
+            }
+        }
+
+        private void DeleteAllFromTable(string schema, string table)
+        {
+            using (var con = OpenConnection())
+            {
+                var tableDeleteAllCommand = $"DELETE FROM \"{ schema}\".\"{ table}\"";
+                using (var cmd = new NpgsqlCommand(tableDeleteAllCommand, con))
+                {
+                    var r = cmd.ExecuteNonQuery();
                 }
             }
         }

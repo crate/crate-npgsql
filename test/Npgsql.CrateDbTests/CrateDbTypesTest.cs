@@ -4,6 +4,7 @@ using System.Linq;
 using Npgsql.CrateDb;
 using System.Data;
 using Npgsql.Logging;
+using NpgsqlTypes;
 
 namespace Npgsql.CrateDbTests
 {
@@ -19,12 +20,15 @@ namespace Npgsql.CrateDbTests
 
             NpgsqlLogManager.Provider = new ConsoleLoggingProvider(NpgsqlLogLevel.Trace);
 
+            CleanUpTestTables();
             CreateTestTable();
             InsertIntoTestTable();
 
             CreateArrayTestTable();
             InsertIntoArrayTestTable();
         }
+
+
 
         [OneTimeTearDown]
         public void TearDown()
@@ -144,13 +148,71 @@ namespace Npgsql.CrateDbTests
         }
 
         [Test]
-        public void TestSelectGeoPoint()
+        public void TestSelectGeoPointArray_Crate_equal_gt_4_1_0()
         {
             using (var con = OpenConnection())
-            using (var cmd = new NpgsqlCommand("select geo_point_field from test", con))
             {
-                var r = cmd.ExecuteScalar();
-                Assert.That(r, Is.EquivalentTo(new double[] { 9.7419021d, 47.4048045d }));
+                if (con.PostgreSqlVersion < new Version("4.1.0"))
+                {
+                    return;
+                }
+                using (var cmd = new NpgsqlCommand("select geo_point_array from arrayTest", con))
+                {
+                    var r = cmd.ExecuteScalar();
+                    Assert.That(r, Is.EqualTo(new[] { new NpgsqlPoint(2.23221, 3.2323232), new NpgsqlPoint(4.23221, 5.2323232) }));
+                }
+            }
+        }
+
+        [Test]
+        public void TestSelectGeoPointArray_Crate_lt_4_1_0()
+        {
+            using (var con = OpenConnection())
+            {
+                if (con.PostgreSqlVersion >= new Version("4.1.0"))
+                {
+                    return;
+                }
+                using (var cmd = new NpgsqlCommand("select geo_point_array from arrayTest", con))
+                {
+                    var r = cmd.ExecuteScalar();
+                    var d = new double[,] { { 2.23221d, 3.2323232d }, { 4.23221d, 5.2323232d } };
+                    Assert.That(r, Is.EquivalentTo(d));
+                }
+            }
+        }
+
+        [Test]
+        public void TestSelectGeoPoint_Crate_equal_gt_4_1_0()
+        {
+            using (var con = OpenConnection())
+            {
+                if (con.PostgreSqlVersion < new Version("4.1.0"))
+                {
+                    return;
+                }
+                using (var cmd = new NpgsqlCommand("select geo_point_field from test", con))
+                {
+                    var r = cmd.ExecuteScalar();
+                    Assert.That(r, Is.EqualTo(new NpgsqlPoint(9.7419021d, 47.4048045d)));
+                }
+            }
+        }
+
+        [Test]
+        public void TestSelectGeoPoint_Crate_lt_4_1_0()
+        {
+            using (var con = OpenConnection())
+            {
+                if (con.PostgreSqlVersion >= new Version("4.1.0"))
+                {
+                    return;
+                }
+                using (var cmd = new NpgsqlCommand("select geo_point_field from test", con))
+                {
+                    var r = cmd.ExecuteScalar();
+                    Assert.That(r, Is.EqualTo(new double[] { 9.7419021d, 47.4048045d }));
+                }
             }
         }
 
@@ -212,7 +274,7 @@ namespace Npgsql.CrateDbTests
                 Assert.That(r, Is.EquivalentTo(new byte[] { 120, 100 }));
             }
         }
-        
+
         [Test]
         public void SelectByteArrayTypeWithNpgsqlGetBytes()
         {
