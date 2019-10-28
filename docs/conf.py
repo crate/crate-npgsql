@@ -1,4 +1,4 @@
-from crate.theme.rtd.conf.crate_npgsql import *
+from crate.theme.rtd.conf.clients_npgsql import *
 
 exclude_patterns = ["out/**"]
 
