@@ -449,9 +449,18 @@ namespace Npgsql.CrateDbTests
             {
                 var r = cmd.ExecuteScalar();
 
-                Assert.That(r, Is.InstanceOf(typeof(string)));
+                TestObject[] objArr;
+                if (con.PostgreSqlVersion >= new Version("4.1.0"))
+                {
+                    Assert.That(r, Is.InstanceOf(typeof(string[])));
+                    objArr = ((string[])r).Select(s => Newtonsoft.Json.JsonConvert.DeserializeObject<TestObject>(s)).ToArray();
+                }
+                else
+                {
+                    Assert.That(r, Is.InstanceOf(typeof(string)));
+                    objArr = Newtonsoft.Json.JsonConvert.DeserializeObject<TestObject[]>((string)r);
+                }
 
-                var objArr = Newtonsoft.Json.JsonConvert.DeserializeObject<TestObject[]>((string)r);
                 Assert.That(objArr, Is.EquivalentTo(new TestObject[]
                 {
                     new TestObject { inner = "Zoon1" },
