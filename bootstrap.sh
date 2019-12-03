@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# travis and jenkins have python3.4 installed
-if hash python3.4 2> /dev/null; then
-    python3.4 -m venv .venv --without-pip
+if hash python3.7 2> /dev/null; then
+    python3.7 -m venv .venv --without-pip
     curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     .venv/bin/python get-pip.py
 elif hash python3 2> /dev/null; then
-    # fallback for dev machines, this should be >= 3.3
+    # fallback to python3 in case there is no python3.7
     python3 -m venv .venv
 else
     echo 'python3 required'
