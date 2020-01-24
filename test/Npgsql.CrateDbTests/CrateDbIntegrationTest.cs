@@ -144,7 +144,7 @@ namespace Npgsql.CrateDbTests
                     cmd.Parameters.AddWithValue("@double_array", new double[] { 1.79769313486231570e+308, 1.69769313486231570e+308 });
                     cmd.Parameters.AddWithValue("@timestamp_array", new DateTime[] { new DateTime(2000, 1, 1).ToUniversalTime(), new DateTime(1970, 1, 1).ToUniversalTime() });
                     cmd.Parameters.AddWithValue("@ip_array", new string[] { "127.142.132.9", "127.0.0.1" });
-                    cmd.Parameters.AddWithValue("@obj_array", NpgsqlTypes.NpgsqlDbType.Json, "[ { \"inner\": \"Zoon1\" }, { \"inner\": \"Zoon2\" } ]");
+                    cmd.Parameters.AddWithValue("@obj_array", new string[] {"{\"inner\": \"Zoon1\"}", "{\"inner\": \"Zoon2\"}"});
                     cmd.Parameters.AddWithValue("@geo_shape_array", new string[] { "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))", "POLYGON ((40 20, 50 50, 30 50, 20 30, 40 20))" });
                     cmd.Parameters.AddWithValue("@geo_point_array", new string[] { "POINT ( 2.23221 3.2323232 )", "POINT ( 4.23221 5.2323232 )" });
                     cmd.ExecuteNonQuery();

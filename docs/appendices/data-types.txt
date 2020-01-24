@@ -95,8 +95,8 @@ extension method, like so:
 Writing objects and object arrays
 ---------------------------------
 
-You can set arbitrary CLR objects and arrays as values for parameters
-referencing columns with a JSON or JSON array `data type`_. For example:
+You can set arbitrary CLR objects as values for parameters referencing columns
+with the JSON `data type`_. For example:
 
 .. code-block:: csharp
 
@@ -104,15 +104,24 @@ referencing columns with a JSON or JSON array `data type`_. For example:
 
     command.Parameters.AddWithValue("@obj_field", NpgsqlTypes.NpgsqlDbType.Json,
                                     new { inner = "Zoon" });
-    command.Parameters.AddWithValue("@obj_array", NpgsqlTypes.NpgsqlDbType.Json,
-                                    new object[] {
-                                        new { inner = "Zoon1" },
-                                        new { inner = "Zoon2" }
-                                    });
     ...
 
 Internally, `Newtonsoft.Json`_ is used to serialize objects to JSON strings and
 vice versa.
+
+An array of objects can be inserted into a table by setting the parameter
+value of the object array column to a string array of JSON strings that
+represent the objects. For example:
+
+.. code-block:: csharp
+
+    ...
+
+    command.Parameters.AddWithValue("@obj_array", new string[] {
+                                        "{\"inner\": \"Zoon1\"}",
+                                        "{\"inner\": \"Zoon2\"}"
+                                    });
+    ...
 
 .. _byte-arrays:
 
