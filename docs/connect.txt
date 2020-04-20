@@ -29,7 +29,7 @@ Connect to CrateDB using a standard `NpgsqlConnection`_ object, like so:
 
 .. code-block:: csharp
 
-    var connString = "Host=127.0.0.1;Username=crate";
+    var connString = "Host=127.0.0.1;Username=crate;SSL Mode=Prefer";
 
     using (var conn = new NpgsqlConnection(connString))
     {
