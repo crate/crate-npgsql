@@ -1,4 +1,4 @@
-from crate.theme.rtd.conf.clients_npgsql import *
+from crate.theme.rtd.conf.npgsql import *
 
 exclude_patterns = ["out/**"]
 
@@ -7,5 +7,5 @@ exclude_patterns = ["out/**"]
 # so it can't find the file
 html_favicon = None
 
-site_url = 'https://crate.io/docs/clients/npgsql/en/latest/'
+site_url = 'https://crate.io/docs/npgsql/en/latest/'
 extensions = ['sphinx_sitemap']
