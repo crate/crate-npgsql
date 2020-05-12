@@ -5,42 +5,75 @@ Developer Guide
 Documentation
 =============
 
-Prerequisites
--------------
+The documentation is written using `Sphinx`_ and `ReStructuredText`_.
 
-Python 3 is required.
 
-Setup
------
+Working on the documentation
+----------------------------
 
-To install the documentation project dependencies, run::
+Python 3.7 is required.
 
-    $ ./bootstrap.sh
+Change into the ``docs`` directory:
 
-Writing Documentation
----------------------
+.. code-block:: console
 
-The docs live under the ``docs`` directory.
+    $ cd docs
 
-The docs are written written with ReStructuredText_ and processed with Sphinx_.
+For help, run:
 
-Build the docs by running::
+.. code-block:: console
 
-    $ bin/sphinx
+    $ make
 
-The output can then be found in the ``out/html`` directory.
+    Crate Docs Utils
 
-If you would like to live-reload the docs as you edit them, you can run::
+    Run `make <TARGET>`, where <TARGET> is one of:
 
-    $ bin/sphinx dev
+      dev     Run a Sphinx development server that builds and lints the
+              documentation as you edit the source files
 
-The docs are automatically built from Git by `Read the Docs`_ and there is
-nothing special you need to do to get the live docs to update.
+      html    Build the static HTML output
+
+      check   Build, test, and lint the documentation
+
+      delint  Remove any `*.lint` files
+
+      reset   Reset the build cache
+
+You must install `fswatch`_ to use the ``dev`` target.
+
+
+Continuous integration and deployment
+-------------------------------------
+
+|utils| |travis| |rtd|
+
+Travis CI is `configured`_ to run ``make check`` from the ``docs`` directory.
+Please do not merge pull requests until the tests pass.
+
+`Read the Docs`_ (RTD) automatically deploys the documentation whenever a
+configured branch is updated.
 
 To make changes to the RTD configuration (e.g., to activate or deactivate a
 release version), please contact the `@crate/docs`_ team.
 
+
 .. _@crate/docs: https://github.com/orgs/crate/teams/docs
+.. _configured: https://github.com/crate/crate-npgsql/blob/master/.travis.yml
+.. _fswatch: https://github.com/emcrisostomo/fswatch
 .. _Read the Docs: http://readthedocs.org
 .. _ReStructuredText: http://docutils.sourceforge.net/rst.html
 .. _Sphinx: http://sphinx-doc.org/
+
+
+.. |utils| image:: https://img.shields.io/endpoint.svg?color=blue&url=https%3A%2F%2Fraw.githubusercontent.com%2Fcrate%2Fcrate-npgsql%2Fmaster%2Fdocs%2Futils.json
+    :alt: Utils version
+    :target: https://github.com/crate/crate-npgsql/blob/master/docs/utils.json
+
+.. |travis| image:: https://img.shields.io/travis/crate/crate-npgsql.svg?style=flat
+    :alt: Travis CI status
+    :target: https://travis-ci.org/crate/crate-npgsql
+
+.. |rtd| image:: https://readthedocs.org/projects/crate-npgsql/badge/?version=latest
+    :alt: Read The Docs status
+    :target: https://readthedocs.org/projects/crate-npgsql
