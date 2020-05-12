@@ -140,7 +140,7 @@ you could do something like this:
 This plugin provides the ``GetBytes(NpgsqlDataReader, int)`` extension method,
 which achieves the same result.
 
-So, you can read a byte array like this:
+You can read a byte array like this:
 
 .. code-block:: csharp
 

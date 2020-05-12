@@ -1,6 +1,10 @@
 ## Manual additions
+.build
 .DS_Store
+.env
+.utils
 .venv
+*.lint
 get-pip.py
 out/
 
