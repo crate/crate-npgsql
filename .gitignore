@@ -1,9 +1,10 @@
 ## Manual additions
 .build
+.clone
+.crate-docs-build
 .DS_Store
 .env
 .utils
-.clone
 .venv
 *.lint
 get-pip.py
