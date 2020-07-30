@@ -1,0 +1,59 @@
+---
+name: Build
+on:
+  pull_request: ~
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 2 * * *'
+
+env:
+  dotnet_sdk_version: '5.0.100-preview.5.20279.10'
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-18.04]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: NuGet Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/Directory.Build.targets') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: cr8 Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/cr8/crates
+          key: cr8-4.2.x
+          restore-keys: ${{ runner.os }}-cr8-
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.dotnet_sdk_version }}
+
+      - name: Setup Python for cr8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Test
+        run: |
+          python -m pip install cr8
+          cr8 run-crate latest-stable -- @dotnet test --framework netcoreapp5.0 test/Npgsql.CrateDbTests --configuration Debug
+        shell: bash

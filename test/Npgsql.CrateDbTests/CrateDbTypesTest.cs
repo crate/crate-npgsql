@@ -193,8 +193,10 @@ namespace Npgsql.CrateDbTests
                 }
                 using (var cmd = new NpgsqlCommand("select geo_point_field from test", con))
                 {
-                    var r = cmd.ExecuteScalar();
-                    Assert.That(r, Is.EqualTo(new NpgsqlPoint(9.7419021d, 47.4048045d)));
+                    var r = (NpgsqlPoint) cmd.ExecuteScalar();
+
+                    Assert.That(r.X, Is.InRange(9.74d, 9.75d));
+                    Assert.That(r.Y, Is.InRange(47.39d, 47.41d));;
                 }
             }
         }
