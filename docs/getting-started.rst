@@ -17,13 +17,10 @@ Install
 The Npgsql plugin is made available as `Npgsql.CrateDB Nuget package`_. Follow
 the appropriate Nuget instructions to get the plugin installed.
 
-.. CAUTION::
+.. NOTE::
 
-    For now, this plugin depends on a `fork`_ of the official `Npgsql
-    project`_ to work. We are, however, working to get the necessary changes
-    merged in upstream.
-
-    Nuget will handle this for you.
+    This plugin depends on a `fork`_ of the upstream Npgsql project to work.
+    (Nuget will handle this for you.)
 
 .. SEEALSO::
 
