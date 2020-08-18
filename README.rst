@@ -2,11 +2,12 @@
 CrateDB Npgsql Plugin
 =====================
 
-A plugin for `Npgsql`_ that provides support for `CrateDB`_.
+A `.NET`_ plugin for `Npgsql`_ that provides backwards compatibility support
+for `CrateDB`_ versions 4.1.x and earlier. CrateDB versions 4.2 and later work
+with Npgsql without the need for a plugin.
 
-Starting with CrateDB 4.2.0 the upstream `Npgsql`_ project can be used
-directly, and this forked version is no longer necessary.
-
+This plugin depends on a `fork`_ of the upstream Npgsql project to work. (Nuget
+will handle this for you.)
 
 Contributing
 ============
@@ -32,7 +33,6 @@ Looking for more help?
 .. _CrateDB: https://github.com/crate/crate
 .. _developer docs: DEVELOP.rst
 .. _fork: https://github.com/crate/npgsql
-.. _Npgsql project: https://github.com/npgsql/npgsql
 .. _Npgsql: https://www.npgsql.org/
 .. _project docs: https://crate.io/docs/clients/npgsql/en/latest/
 .. _support channels: https://crate.io/support/
