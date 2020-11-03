@@ -5,9 +5,11 @@ CrateDB Npgsql Plug-In
 ======================
 
 A `.NET`_ plugin for `Npgsql`_ that provides backwards compatibility support
-for `CrateDB`_ versions 4.1.x and earlier. CrateDB versions 4.2 and later work
-with Npgsql without the need for a plugin.
+for `CrateDB`_ versions 4.1.x and earlier. 
 
+.. WARNING::
+
+   CrateDB versions 4.2 and later work with `Npgsql`_ without the need for a plugin.
 
 .. NOTE::
 
