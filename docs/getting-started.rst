@@ -6,6 +6,13 @@ Getting started
 
 Install and get started with the :ref:`CrateDB Npgsql Plugin <index>`.
 
+.. NOTE::
+
+    Please note that this driver is not recommended with recent releases of
+    CrateDB >= 4.2, which works fine with the vanilla Npgsql driver. See
+    also :ref:`index`.
+
+
 .. rubric:: Table of contents
 
 .. contents::
@@ -31,7 +38,7 @@ the appropriate Nuget instructions to get the plugin installed.
 .. NOTE::
 
     If you're using a generic database program that can work with any ADO.NET
-    provider but doesn't come with Npgsql or reference it directly, you can
+    provider but doesn't come with Npgsql or references it directly, you can
     install Npgsql with the CrateDB plugin into your `Global Assembly Cache`_
     (GAC) with our custom `Npgsql Installer`_.
 
