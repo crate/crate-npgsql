@@ -6,6 +6,13 @@ Connect to CrateDB
 
 Connect to CrateDB using the :ref:`CrateDB Npgsql Plugin <index>`.
 
+.. NOTE::
+
+    Please note that this driver is not recommended with recent releases of
+    CrateDB >= 4.2, which works fine with the vanilla Npgsql driver. See
+    also :ref:`index`.
+
+
 .. rubric:: Table of contents
 
 .. contents::
