@@ -5,17 +5,17 @@ CrateDB Npgsql Plug-In
 ======================
 
 
-.. CAUTION::
+CAUTION::
 
-    Please don't use this driver with recent versions of CrateDB.
+    For CrateDB versions 4.2 and above, we recommend that you use the `stock
+    Npgsql driver` instead of this one.
 
-    CrateDB versions prior to 4.2 needed a custom fork of the official `Npgsql`_
-    `.NET`_ data provider for PostgreSQL, `Npgsql.CrateDb`_. CrateDB versions
-    4.2 and later work with the vanilla Npgsql driver without the need for a
-    plugin.
+    This software, is a legacy plugin for older versions of CrateDB that lacked
+    full compatibility with Npgsql.
 
-For general help using Npgsql, please consult the standard `Npgsql
-documentation`_. For quickly getting started, please also consult the `basic
+For general help using the official `Npgsql`_ `.NET`_ data provider for
+PostgreSQL, please consult the standard `Npgsql documentation`_.
+For quickly getting started, please also consult the `basic
 demonstration program for using CrateDB with vanilla Npgsql`_.
 
 
@@ -40,4 +40,4 @@ demonstration program for using CrateDB with vanilla Npgsql`_.
 .. _.NET: https://www.microsoft.com/net
 .. _Npgsql: https://www.npgsql.org/
 .. _Npgsql documentation: https://www.npgsql.org/doc/index.html
-.. _Npgsql.CrateDb: https://www.nuget.org/packages/Npgsql.CrateDb/
+.. _stock Npgsql driver: https://www.npgsql.org/
