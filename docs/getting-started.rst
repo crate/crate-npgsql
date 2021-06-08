@@ -6,12 +6,13 @@ Getting started
 
 Install and get started with the :ref:`CrateDB Npgsql Plugin <index>`.
 
-.. NOTE::
+CAUTION::
 
-    Please note that this driver is not recommended with recent releases of
-    CrateDB >= 4.2, which works fine with the vanilla Npgsql driver. See
-    also :ref:`index`.
+    For CrateDB versions 4.2 and above, we recommend that you use the `stock
+    Npgsql driver` instead of this one.
 
+    This software is a legacy plugin for older versions of CrateDB that lacked
+    full compatibility with Npgsql.
 
 .. rubric:: Table of contents
 
@@ -48,11 +49,12 @@ Next steps
 Once the plugin is installed, you probably want to :ref:`connect to CrateDB
 <connect>`.
 
-.. _Npgsql.CrateDB Nuget package: https://www.nuget.org/packages/Npgsql.CrateDb/
 .. _dotnet CLI: https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-using-the-dotnet-cli
 .. _fork: https://github.com/crate/npgsql
 .. _Global Assembly Cache: https://docs.microsoft.com/en-us/dotnet/framework/app-domains/gac
 .. _introduction to Nuget: https://docs.microsoft.com/en-us/nuget/what-is-nuget
+.. _Npgsql.CrateDB Nuget package: https://www.nuget.org/packages/Npgsql.CrateDb/
 .. _Npgsql Installer: https://cdn.crate.io/downloads/releases/npgsql/
 .. _Npgsql project: https://github.com/npgsql/npgsql
+.. _stock Npgsql driver: https://www.npgsql.org/
 .. _Visual Studio: https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio
