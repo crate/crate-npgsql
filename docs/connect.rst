@@ -6,12 +6,13 @@ Connect to CrateDB
 
 Connect to CrateDB using the :ref:`CrateDB Npgsql Plugin <index>`.
 
-.. NOTE::
+CAUTION::
 
-    Please note that this driver is not recommended with recent releases of
-    CrateDB >= 4.2, which works fine with the vanilla Npgsql driver. See
-    also :ref:`index`.
+    For CrateDB versions 4.2 and above, we recommend that you use the `stock
+    Npgsql driver` instead of this one.
 
+    This software is a legacy plugin for older versions of CrateDB that lacked
+    full compatibility with Npgsql.
 
 .. rubric:: Table of contents
 
