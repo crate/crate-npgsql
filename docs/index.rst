@@ -8,9 +8,9 @@ CrateDB Npgsql Plug-In
 .. CAUTION::
 
     For CrateDB versions 4.2 and above, we recommend that you use the `stock
-    Npgsql driver` instead of this one.
+    Npgsql driver`_ instead of this one.
 
-    This software, is a legacy plugin for older versions of CrateDB that lacked
+    This software is a legacy plugin for older versions of CrateDB that lacked
     full compatibility with Npgsql.
 
 For general help using the official `Npgsql`_ `.NET`_ data provider for
