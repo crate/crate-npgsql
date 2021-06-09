@@ -6,7 +6,7 @@ Getting started
 
 Install and get started with the :ref:`CrateDB Npgsql Plugin <index>`.
 
-CAUTION::
+.. CAUTION::
 
     For CrateDB versions 4.2 and above, we recommend that you use the `stock
     Npgsql driver` instead of this one.
