@@ -8,6 +8,14 @@ on:
   schedule:
     - cron: '0 2 * * *'
 
+  # Allow job to be triggered manually.
+  workflow_dispatch:
+
+# Cancel in-progress jobs when pushing to the same branch.
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 env:
   dotnet_sdk_version: '5.0.100-preview.5.20279.10'
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
