@@ -33,7 +33,7 @@ demonstration program for using CrateDB with vanilla Npgsql`_.
     The CrateDB Npgsql Plugin is an open source project and it is hosted on
     GitHub at `crate-npgsql`_.
 
-.. _basic demonstration program for using CrateDB with vanilla Npgsql: https://github.com/crate/cratedb-examples/tree/main/spikes/npgsql-vanilla
+.. _basic demonstration program for using CrateDB with vanilla Npgsql: https://github.com/crate/cratedb-examples/tree/main/by-language/csharp-npgsql
 .. _Crate.io: http://crate.io/
 .. _CrateDB: https://crate.io/docs/crate/reference/
 .. _crate-npgsql: https://github.com/crate/crate-npgsql
