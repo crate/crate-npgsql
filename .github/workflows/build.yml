@@ -36,7 +36,7 @@ jobs:
           submodules: true
 
       - name: NuGet Cache
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/Directory.Build.targets') }}
@@ -44,7 +44,7 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: cr8 Cache
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.cache/cr8/crates
           key: cr8-4.2.x
