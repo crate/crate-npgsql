@@ -26,7 +26,7 @@ demonstration program for using CrateDB with vanilla Npgsql`_.
 
    getting-started
    connect
-   appendices/index
+   data-types
 
 .. SEEALSO::
 

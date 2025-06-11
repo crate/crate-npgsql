@@ -62,7 +62,7 @@ Use the standard `Npgsql documentation`_ for the rest of your setup process.
 
 .. SEEALSO::
 
-    The plugin :ref:`data-types` appendix.
+    The plugin :ref:`data-types`.
 
 .. _connection string parameters: https://www.npgsql.org/doc/connection-string-parameters.html
 .. _DatabaseInfoFactory: https://www.npgsql.org/doc/api/Npgsql.Internal.NpgsqlDatabaseInfo.html
