@@ -14,10 +14,6 @@ Install and get started with the :ref:`CrateDB Npgsql Plugin <index>`.
     This software is a legacy plugin for older versions of CrateDB that lacked
     full compatibility with Npgsql.
 
-.. rubric:: Table of contents
-
-.. contents::
-   :local:
 
 Install
 =======

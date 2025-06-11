@@ -22,11 +22,11 @@ demonstration program for using CrateDB with vanilla Npgsql`_.
 .. rubric:: Table of contents
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    getting-started
    connect
-   appendices/index
+   data-types
 
 .. SEEALSO::
 
