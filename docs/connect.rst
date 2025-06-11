@@ -14,10 +14,6 @@ Connect to CrateDB using the :ref:`CrateDB Npgsql Plugin <index>`.
     This software is a legacy plugin for older versions of CrateDB that lacked
     full compatibility with Npgsql.
 
-.. rubric:: Table of contents
-
-.. contents::
-   :local:
 
 Setup
 =====
