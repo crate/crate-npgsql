@@ -15,6 +15,9 @@ For `.NET`_ developers, we encourage you to use the stock `Npgsql`_ drivers.
 You can learn more by studying our `example`_ or our `csharp docs`_.
 
 
+Introduction
+============
+
 A `.NET`_ plugin for `Npgsql`_ that provides backwards compatibility support
 for `CrateDB`_ versions 4.1.x and earlier. CrateDB versions 4.2 and later work
 with Npgsql without the need for a plugin.
