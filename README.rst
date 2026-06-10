@@ -2,6 +2,19 @@
 CrateDB Npgsql Plugin
 =====================
 
+Archived plugin
+===============
+
+The CrateDB Npgsql Plugin is archived and is not maintained. The plugin is not
+required for connecting to CrateDB version 4.2 and later. 
+
+CrateDB version 4.1 was released in January 2020, and it has reached end-of-life
+and it has been deprecated.
+
+For `.NET`_ developers, we encourage you to use the stock `Npgsql`_ drivers.
+You can learn more by studying our `example`_ or our `_csharp docs`_.
+
+
 A `.NET`_ plugin for `Npgsql`_ that provides backwards compatibility support
 for `CrateDB`_ versions 4.1.x and earlier. CrateDB versions 4.2 and later work
 with Npgsql without the need for a plugin.
@@ -36,3 +49,5 @@ Looking for more help?
 .. _Npgsql: https://www.npgsql.org/
 .. _project docs: https://crate.io/docs/clients/npgsql/en/latest/
 .. _support channels: https://crate.io/support/
+.. _example: https://github.com/crate/cratedb-examples/tree/main/by-language/csharp-npgsql
+.. _csharp docs: https://cratedb.com/docs/guide/connect/csharp/index.html
