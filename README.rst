@@ -12,7 +12,7 @@ CrateDB version 4.1 was released in January 2020, and it has reached end-of-life
 and it has been deprecated.
 
 For `.NET`_ developers, we encourage you to use the stock `Npgsql`_ drivers.
-You can learn more by studying our `example`_ or our `_csharp docs`_.
+You can learn more by studying our `example`_ or our `csharp docs`_.
 
 
 A `.NET`_ plugin for `Npgsql`_ that provides backwards compatibility support
